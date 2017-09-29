@@ -1,0 +1,12 @@
+@import '~vue-material/src/core/stylesheets/core';
+@import '~vue-material/src/components/mdLayout/mdLayout';
+@import '~vue-material/src/components/mdToolbar/mdToolbar';
+@import '~vue-material/src/components/mdButton/mdButton';
+@import '~vue-material/src/components/mdIcon/mdIcon';
+@import '~vue-material/src/components/mdCard/mdCard';
+
+@import 'base';
+
+body {
+  margin: 0;
+}

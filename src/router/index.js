@@ -1,21 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import BusLine from '@/components/BusLine'
+import BusList from '@/components/BusList'
+import BusItem from '@/components/BusItem'
+import Favorite from '@/components/Favorite'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'BusList',
+      component: BusList
     },
     {
       path: '/bus/:line',
-      name: 'BusLine',
-      component: BusLine
+      name: 'BusItem',
+      component: BusItem
+    },
+    {
+      path: '/favorite',
+      name: 'Favorite',
+      component: Favorite
     }
   ]
 })
