@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BusList from '@/components/BusList'
-import BusItem from '@/components/BusItem'
-import Favorite from '@/components/Favorite'
+import BusList from '../components/BusList'
+import BusInformation from '../components/BusInformation'
+import Favorite from '../components/Favorite'
 
 Vue.use(Router)
 
@@ -16,8 +16,8 @@ export default new Router({
     },
     {
       path: '/bus/:line',
-      name: 'BusItem',
-      component: BusItem
+      name: 'BusInformation',
+      component: BusInformation
     },
     {
       path: '/favorite',

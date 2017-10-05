@@ -31,7 +31,7 @@
 <script>
   import LineService from '../services/LineService'
   export default {
-    name: 'BusItem',
+    name: 'BusInformation',
     data () {
       return {
         busItem: null

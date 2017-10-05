@@ -10,21 +10,18 @@
       <input name="filter" v-model.trim="filterTerm" />
     </label>
     <h2>Linii</h2>
-    <ul v-if="filteredBuses.length > 0">
-      <li v-for="bus in filteredBuses" :key="bus.name">
-        <router-link :to="'bus/' + bus.name" :class="typeClass(bus)">
-          <h3 class="md-title">{{ bus.name }}</h3>
-          <p>{{ bus.route }}</p>
-          <small class="md-title">{{ bus.linieType }}</small>
-          <small class="md-subheading">{{ bus.type }}</small>
-        </router-link>
-      </li>
-    </ul>
+    <BaseList :list="buses">
+      <template scope="bus">
+        <BaseListItem :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.linieType"></BaseListItem>
+      </template>
+    </BaseList>
   </div>
 </template>
 
 <script>
   import LineService from '../services/LineService'
+  import BaseList from './shared/BaseList'
+  import BaseListItem from './shared/BaseListItem'
   export default {
     name: 'BusList',
     data () {
@@ -33,6 +30,9 @@
         selectedType: [],
         filterTerm: null
       }
+    },
+    components: {
+      BaseList, BaseListItem
     },
     mounted () {
       this.fetchData()
@@ -58,14 +58,6 @@
       }
     },
     methods: {
-      typeClass (bus) {
-        return {
-          'md-primary': bus.type === 'tramvaie',
-          'md-accent': bus.type === 'autobuze',
-          'md-warn': bus.type === 'microbuze',
-          'md-danger': bus.type === 'troleibuze'
-        }
-      },
       async fetchData () {
         this.buses = await LineService.getBusesBasic()
       }

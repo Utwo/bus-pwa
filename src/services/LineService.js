@@ -6,34 +6,31 @@ const HTTP = axios.create({
 
 const loadedData = { line: [] }
 
-function getBusesDetail () {
+async function getBusesDetail () {
   if (loadedData.busesDetail) {
     return loadedData.busesDetail
   }
-  return HTTP.get('busses_detail.json').then(response => {
-    loadedData.busesDetail = transformBusesResponse(response.data)
-    return response.data
-  })
+  const response = await HTTP.get('busses_detail.json')
+  loadedData.busesDetail = transformBusesResponse(response.data)
+  return response.data
 }
 
-function getBusesBasic () {
+async function getBusesBasic () {
   if (loadedData.busesBasic) {
     return loadedData.busesBasic
   }
-  return HTTP.get('busses_basic.json').then(response => {
-    loadedData.busesBasic = transformBusesResponse(response.data)
-    return loadedData.busesBasic
-  })
+  const response = await HTTP.get('busses_basic.json')
+  loadedData.busesBasic = transformBusesResponse(response.data)
+  return loadedData.busesBasic
 }
 
-function getLine (lineName) {
+async function getLine (lineName) {
   if (loadedData.line[lineName]) {
     return loadedData.line[lineName]
   }
-  return HTTP.get(lineName + '.json').then(response => {
-    loadedData.line[lineName] = response.data
-    return response.data
-  })
+  const response = await HTTP.get(lineName + '.json')
+  loadedData.line[lineName] = response.data
+  return response.data
 }
 
 function addToFavorite (lineNumber) {

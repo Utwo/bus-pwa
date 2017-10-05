@@ -7,8 +7,8 @@
           <h3 class="md-title">{{ bus.name }}</h3>
           <p>{{ bus.route }}</p>
           <small class="md-subheading">{{ bus.type }}</small>
-          <p v-if="bus.next_in_stop">{{ bus.next_in_stop.name }} : {{ bus.next_in_stop.hour }}</p>
-          <p v-if="bus.next_out_stop">{{ bus.next_out_stop.name }} : {{ bus.next_out_stop.hour }}</p>
+          <p v-if="bus.next_in_stop">{{ bus.next_in_stop.name }} : {{ bus.next_in_stop.hour }} in aprox {{ bus.next_in_stop.remainingMin }}</p>
+          <p v-if="bus.next_out_stop">{{ bus.next_out_stop.name }} : {{ bus.next_out_stop.hour }} in aprox {{ bus.next_out_stop.remainingMin }}</p>
         </router-link>
       </li>
     </ul>
@@ -17,7 +17,7 @@
 
 <script>
   import LineService from '../services/LineService'
-  import commonFunctions from './shared/CommonFunctions'
+  import commonFunctions from '../services/CommonFunctions'
 
   export default {
     name: 'Favorite',

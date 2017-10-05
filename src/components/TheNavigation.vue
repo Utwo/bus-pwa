@@ -15,9 +15,6 @@
 
 <script>
   export default {
-    name: 'Navigation',
-    data: () => ({
-      drawer: true
-    })
+    name: 'TheNavigation'
   }
 </script>
