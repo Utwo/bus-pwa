@@ -1,12 +1,17 @@
 <template>
-  <li>
+  <md-list-item>
     <router-link :to="'bus/' + title" :class="typeStyleClass(transportationType)">
-      <h3 class="md-title">{{ title }}</h3>
-      <p>{{ route }}</p>
-      <small class="md-title">{{ zone }}</small>
-      <small class="md-subheading">{{ transportationType }}</small>
+      <div class="md-list-text-container">
+        <span>{{ title }}</span>
+        <span>{{ route }}</span>
+      </div>
+
+      <md-button class="md-icon-button md-list-action">
+        <md-icon>directions_transit</md-icon>
+      </md-button>
+      <md-divider class="md-inset"></md-divider>
     </router-link>
-  </li>
+  </md-list-item>
 </template>
 
 <script>
@@ -33,10 +38,10 @@
     methods: {
       typeStyleClass (transportationType) {
         return {
-          'md-primary': transportationType === 'tramvaie',
-          'md-accent': transportationType === 'autobuze',
-          'md-warn': transportationType === 'microbuze',
-          'md-danger': transportationType === 'troleibuze'
+          'tramvaie': transportationType === 'tramvaie',
+          'autobuze': transportationType === 'autobuze',
+          'microbuze': transportationType === 'microbuze',
+          'troleibuze': transportationType === 'troleibuze'
         }
       }
     }

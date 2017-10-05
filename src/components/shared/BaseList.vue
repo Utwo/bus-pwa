@@ -1,7 +1,7 @@
 <template>
-  <ul v-if="list.length > 0" :key="'List'">
+  <md-list v-if="list.length > 0" :key="'List'">
       <slot v-for="item in list" v-bind="item"></slot>
-  </ul>
+  </md-list>
   <p v-else :key="'NoData'">No data</p>
 </template>
 
