@@ -1,56 +1,95 @@
 <template>
-  <div class="phone-viewport">
-    <md-toolbar>
-      <md-button class="md-icon-button" @click="toggleLeftSidenav">
-        <md-icon>menu</md-icon>
-      </md-button>
-
-      <h2 class="md-title">Bus PWA</h2>
-
-      <span style="flex: 1"></span>
-
-      <md-button class="md-icon-button">
-        <md-icon>search</md-icon>
-      </md-button>
-
-      <md-button class="md-icon-button">
-        <md-icon>view_module</md-icon>
-      </md-button>
-    </md-toolbar>
-
-    <md-sidenav class="md-left" ref="leftSidenav">
-      <md-toolbar>
-        <div class="md-toolbar-container">
-          <h3 class="md-title">Bus PWA</h3>
-        </div>
-      </md-toolbar>
-
-      <md-list>
-        <md-list-item>
-          <md-icon>directions_bus</md-icon>
-          <span><router-link :to="'/'">Lines</router-link></span>
-        </md-list-item>
-
-        <md-list-item>
-          <md-icon>favorite</md-icon>
-          <span><router-link :to="'/favorite'">Favorites</router-link></span>
-        </md-list-item>
-
-        <md-list-item>
-          <md-icon>favorite</md-icon>
-          <span><router-link :to="'/about'">About</router-link></span>
-        </md-list-item>
-      </md-list>
-    </md-sidenav>
+  <div>
+  <v-navigation-drawer
+    persistent
+    app
+    light
+    temporary
+    clipped
+    isActive="drawer"
+    v-model="drawer"
+    class="white"
+  >
+    <v-divider></v-divider>
+    <v-list>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon color="primary">directions_bus</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <router-link :to="'/'">Lines</router-link>
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon color="red">favorite</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <router-link :to="'/favorite'">Favorites</router-link>
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon color="orange">face</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <router-link :to="'/about'">About</router-link>
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+    </v-list>
+  </v-navigation-drawer>
+  <v-toolbar
+    class="primary elevation-0"
+    dark
+    app
+    extended
+  >
+    <v-toolbar-title style="width: 300px" class="ml-0 pl-3 grey--text text--lighten-4">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      Bus PWA
+    </v-toolbar-title>
+    <!--<v-text-field
+      solo
+      prepend-icon="search"
+      placeholder="Search"
+    ></v-text-field>-->
+  </v-toolbar>
   </div>
+  <!--<v-toolbar dark class="primary elevation-0" extended>
+    <v-toolbar-side-icon></v-toolbar-side-icon>
+-->
+
+      <!--<v-list>
+        <v-list-tile>
+          <v-icon>directions_bus</v-icon>
+          <span><router-link :to="'/'">Lines</router-link></span>
+        </v-list-tile>
+
+        <v-list-tile>
+          <v-icon>favorite</v-icon>
+          <span><router-link :to="'/favorite'">Favorites</router-link></span>
+        </v-list-tile>
+
+        <v-list-tile>
+          <v-icon>favorite</v-icon>
+          <span><router-link :to="'/about'">About</router-link></span>
+        </v-list-tile>
+      </v-list>-->
+  <!--</v-toolbar>-->
 </template>
 
 <script>
   export default {
     name: 'TheNavigation',
-    methods: {
-      toggleLeftSidenav () {
-        this.$refs.leftSidenav.toggle()
+    data () {
+      return {
+        drawer: true
       }
     }
   }

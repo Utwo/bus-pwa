@@ -1,17 +1,23 @@
 <template>
-  <md-list-item>
-    <router-link :to="'bus/' + title" :class="typeStyleClass(transportationType)">
-      <div class="md-list-text-container">
-        <span>{{ title }}</span>
-        <span>{{ route }}</span>
-      </div>
-
-      <md-button class="md-icon-button md-list-action">
-        <md-icon>directions_transit</md-icon>
-      </md-button>
-      <md-divider class="md-inset"></md-divider>
-    </router-link>
-  </md-list-item>
+  <div>
+  <v-list-tile avatar>
+    <v-list-tile-avatar>
+      <v-icon :class="typeStyleClass(transportationType)" class="white--text">directions_transit</v-icon>
+    </v-list-tile-avatar>
+    <v-list-tile-content>
+      <router-link :to="'bus/' + title">
+        <v-list-tile-title>{{ title }}</v-list-tile-title>
+        <v-list-tile-sub-title class='grey--text text--darken-2'>{{ route }}</v-list-tile-sub-title>
+      </router-link>
+    </v-list-tile-content>
+    <v-list-tile-action>
+      <v-btn icon ripple>
+        <v-icon class="grey--text text--lighten-1">info</v-icon>
+      </v-btn>
+    </v-list-tile-action>
+  </v-list-tile>
+  <v-divider class="grey lighten-2"></v-divider>
+</div>
 </template>
 
 <script>
@@ -38,10 +44,10 @@
     methods: {
       typeStyleClass (transportationType) {
         return {
-          'tramvaie': transportationType === 'tramvaie',
-          'autobuze': transportationType === 'autobuze',
-          'microbuze': transportationType === 'microbuze',
-          'troleibuze': transportationType === 'troleibuze'
+          'deep-purple': transportationType === 'tramvaie',
+          'cyan': transportationType === 'autobuze',
+          'orange': transportationType === 'microbuze',
+          'pink': transportationType === 'troleibuze'
         }
       }
     }

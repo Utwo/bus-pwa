@@ -1,16 +1,24 @@
 <template>
   <div>
-    <div>
-     <!-- <md-checkbox title="tramvaie" name="tramvaie" v-model="selectedType" md-value="tramvaie" class="md-primary">tramvaie</md-checkbox>
-      <md-checkbox title="autobuze" name="autobuze" v-model="selectedType" md-value="autobuze" class="md-primary">autobuze</md-checkbox>
-      <md-checkbox title="microbuze" name="microbuze" v-model="selectedType" md-value="microbuze" class="md-primary">microbuze</md-checkbox>
-      <md-checkbox title="troleibuze" name="troleibuze" v-model="selectedType" md-value="troleibuze" class="md-primary">troleibuze</md-checkbox>-->
-    </div>
-    <md-input-container>
-      <md-icon>search</md-icon>
-      <md-input name="filter" type="tel" v-model.trim="filterTerm"></md-input>
-    </md-input-container>
-    <h2>Linii</h2>
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan">autobuze</v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">troleibuze</v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="tramvaie" name="tramvaie" v-model="selectedType" value="tramvaie" color="deep-purple">tramvaie</v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">microbuze</v-checkbox>
+        </v-flex>
+      </v-layout>
+      <v-text-field  solo
+                     prepend-icon="search"
+                     placeholder="Search" name="filter" type="number" v-model.trim="filterTerm"></v-text-field>
+    </v-container>
     <BaseList :list="filteredBuses">
       <template scope="bus">
         <BaseListItem :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.linieType"></BaseListItem>

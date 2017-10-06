@@ -1,41 +1,54 @@
 import Vue from 'vue'
-// import VueMaterial from 'vue-material'
-import { MdCore, MdToolbar, MdIcon, MdButton, MdCard, MdLayout, MdSidenav, MdBackdrop, MdList, MdCheckbox, MdInputContainer, MdWhiteframe, MdDivider, MdTabs } from 'vue-material'
-// import { MdButton } from 'vue-material/dist/components/mdButton'
+import Vuetify from 'vuetify/es5/components/Vuetify'
+import VGrid from 'vuetify/es5/components/VGrid'
+import VApp from 'vuetify/es5/components/VApp'
+import VSubheader from 'vuetify/es5/components/VSubheader'
+import VNavigationDrawer from 'vuetify/es5/components/VNavigationDrawer'
+import VCard from 'vuetify/es5/components/VCard'
+import VFooter from 'vuetify/es5/components/VFooter'
+import VList from 'vuetify/es5/components/VList'
+import VAvatar from 'vuetify/es5/components/VAvatar'
+import VToolbar from 'vuetify/es5/components/VToolbar'
+import VDivider from 'vuetify/es5/components/VDivider'
+import VBtn from 'vuetify/es5/components/VBtn'
+import VTabs from 'vuetify/es5/components/VTabs'
+import VIcon from 'vuetify/es5/components/VIcon'
+import VForm from 'vuetify/es5/components/VForm'
+import VCheckbox from 'vuetify/es5/components/VCheckbox'
+import VTextField from 'vuetify/es5/components/VTextField'
+import Touch from 'vuetify/es5/directives/touch'
 import App from './App.vue'
 import router from './router'
-import './assets/main.scss'
+import './assets/main.styl'
 
 Vue.config.productionTip = false
+Vue.use(Vuetify, {
+  components: {
+    VApp,
+    VNavigationDrawer,
+    VFooter,
+    VToolbar,
+    VDivider,
+    VCard,
+    VForm,
+    VIcon,
+    VAvatar,
+    VList,
+    VTabs,
+    VSubheader,
+    VCheckbox,
+    VTextField,
+    VGrid,
+    VBtn
+  },
+  directives: {
+    Touch
+  }
+})
 
-Vue.use(MdCore)
-Vue.use(MdLayout)
-Vue.use(MdButton)
-Vue.use(MdToolbar)
-Vue.use(MdSidenav)
-Vue.use(MdBackdrop)
-Vue.use(MdList)
-Vue.use(MdCheckbox)
-Vue.use(MdIcon)
-Vue.use(MdInputContainer)
-Vue.use(MdWhiteframe)
-Vue.use(MdDivider)
-Vue.use(MdCard)
-Vue.use(MdTabs)
-/* Vue.component(MdCore.name, MdCore)
-Vue.component(MdButton.name, MdButton)
-Vue.component(MdToolbar.name, MdToolbar)
-Vue.component(MdIcon.name, MdIcon) */
-
-/* eslint-disable no-new */
+/* eslint no-new:0 */
 new Vue({
   el: '#app',
   router,
-  /* components: {
-    MdCore,
-    MdButton,
-    MdToolbar,
-    MdIcon
-  }, */
   render: h => h(App)
 })
