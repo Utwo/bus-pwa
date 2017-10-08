@@ -15,9 +15,6 @@
           <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">microbuze</v-checkbox>
         </v-flex>
       </v-layout>
-      <v-text-field  solo
-                     prepend-icon="search"
-                     placeholder="Search" name="filter" type="number" v-model.trim="filterTerm"></v-text-field>
     </v-container>
     <BaseList :list="filteredBuses">
       <template scope="bus">

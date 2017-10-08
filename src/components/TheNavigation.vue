@@ -1,87 +1,42 @@
 <template>
-  <div>
-  <v-navigation-drawer
-    persistent
-    app
-    light
-    temporary
-    clipped
-    isActive="drawer"
-    v-model="drawer"
-    class="white"
-  >
-    <v-divider></v-divider>
-    <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon color="primary">directions_bus</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              <router-link :to="'/'">Lines</router-link>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon color="red">favorite</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              <router-link :to="'/favorite'">Favorites</router-link>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon color="orange">face</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
+  <v-tabs light fixed icons grow :scrollable="false" class="navigation">
+    <v-toolbar class="green lighten-2 white--text">
+      <v-toolbar-side-icon @click="showNavigation = !showNavigation"></v-toolbar-side-icon>
+      <v-toolbar-title>Cluj BUS</v-toolbar-title>
+      <v-text-field  solo
+                     prepend-icon="search"
+                     placeholder="Search"
+                     name="filter"
+                     type="text"
+                     class="mx-5 green lighten-1 elevation-0 white--text"
+                     style="max-width: 800px"
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-menu bottom right :nudge-width="100">
+        <v-btn icon slot="activator">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+        <v-list class="white">
+          <v-list-tile>
             <v-list-tile-title>
               <router-link :to="'/about'">About</router-link>
             </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
-  <v-toolbar
-    class="primary elevation-0"
-    dark
-    app
-    extended
-  >
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-3 grey--text text--lighten-4">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      Bus PWA
-    </v-toolbar-title>
-    <!--<v-text-field
-      solo
-      prepend-icon="search"
-      placeholder="Search"
-    ></v-text-field>-->
-  </v-toolbar>
-  </div>
-  <!--<v-toolbar dark class="primary elevation-0" extended>
-    <v-toolbar-side-icon></v-toolbar-side-icon>
--->
-
-      <!--<v-list>
-        <v-list-tile>
-          <v-icon>directions_bus</v-icon>
-          <span><router-link :to="'/'">Lines</router-link></span>
-        </v-list-tile>
-
-        <v-list-tile>
-          <v-icon>favorite</v-icon>
-          <span><router-link :to="'/favorite'">Favorites</router-link></span>
-        </v-list-tile>
-
-        <v-list-tile>
-          <v-icon>favorite</v-icon>
-          <span><router-link :to="'/about'">About</router-link></span>
-        </v-list-tile>
-      </v-list>-->
-  <!--</v-toolbar>-->
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+      <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-if="showNavigation">
+        <v-tabs-slider class="cyan"></v-tabs-slider>
+        <v-tabs-item to="/" router>
+          <v-icon class="green--text">directions_bus</v-icon>
+          <span class="green--text">Lines</span>
+        </v-tabs-item>
+        <v-tabs-item to="/favorite" router>
+          <v-icon class="green--text">favorite</v-icon>
+          <span class="green--text">Favorites</span>
+        </v-tabs-item>
+      </v-tabs-bar>
+    </v-toolbar>
+  </v-tabs>
 </template>
 
 <script>
@@ -89,7 +44,7 @@
     name: 'TheNavigation',
     data () {
       return {
-        drawer: true
+        showNavigation: true
       }
     }
   }

@@ -1,25 +1,46 @@
 <template>
-  <div>
-    <h2>Favorite</h2>
-    <ul v-if="favoriteBusesWithStop.length !== 0">
-      <li v-for="bus in favoriteBusesWithStop" :key="bus.name">
-        <router-link :to="'bus/' + bus.name" :class="typeClass(bus)">
-          <h3 class="md-title">{{ bus.name }}</h3>
-          <p>{{ bus.route }}</p>
-          <small class="md-subheading">{{ bus.type }}</small>
-          <p v-if="bus.next_in_stop">{{ bus.next_in_stop.name }} : {{ bus.next_in_stop.hour }} in aprox {{ bus.next_in_stop.remainingMin }}</p>
-          <p v-if="bus.next_out_stop">{{ bus.next_out_stop.name }} : {{ bus.next_out_stop.hour }} in aprox {{ bus.next_out_stop.remainingMin }}</p>
-        </router-link>
-      </li>
-    </ul>
-  </div>
+  <v-container
+    fluid
+    style="min-height: 0;"
+    grid-list-lg
+  >
+    <v-layout row wrap>
+      <v-flex xs12
+              v-for="bus in favoriteBusesWithStop"
+              :key="bus.name" :to="'bus/' + bus.name"
+              v-if="favoriteBusesWithStop.length !== 0">
+        <v-card :to="'/bus/' + bus.name" class="black--text">
+          <v-card-title>
+            <div>
+              <h2 class="headline avatar">
+                <v-icon :class="typeStyleClass(bus.type)" class="pa-1 mr-2 white--text">directions_transit</v-icon>
+                {{ bus.name }}
+              </h2>
+              <p v-if="bus.next_in_stop">{{ bus.next_in_stop.name
+                }} : {{ bus.next_in_stop.hour
+                }} in aprox
+                <v-chip class="primary white--text">{{ bus.next_in_stop.remainingMin }} min</v-chip>
+              </p>
+              <p v-if="bus.next_out_stop">{{ bus.next_out_stop.name
+                }} : {{ bus.next_out_stop.hour
+                }} in aprox
+                <v-chip class="secondary white--text">{{ bus.next_out_stop.remainingMin }} min</v-chip>
+              </p>
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
   import LineService from '../services/LineService'
   import commonFunctions from '../services/CommonFunctions'
+  import VDivider from 'vuetify/src/components/VDivider/VDivider'
 
   export default {
+    components: {VDivider},
     name: 'Favorite',
     data () {
       return {
@@ -40,11 +61,12 @@
       }
     },
     methods: {
-      typeClass (bus) {
+      typeStyleClass (transportationType) {
         return {
-          'md-primary': bus.type === 'tramvaie',
-          'md-accent': bus.type === 'autobuze',
-          'md-warn': bus.type === 'microbuze'
+          'deep-purple': transportationType === 'tramvaie',
+          'cyan': transportationType === 'autobuze',
+          'orange': transportationType === 'microbuze',
+          'pink': transportationType === 'troleibuze'
         }
       },
       async fetchData () {

@@ -16,6 +16,14 @@ function calculateNextStationTime (busLine) {
   const hourList = busLine.statii[filterDay].linies
   const timeNow = todayDate.getHours() + ':' + todayDate.getMinutes()
   const next = {}
+  if (hourList[0][0] < timeNow && !next.next_in_stop) {
+    const remainingMin = calculateTimeDifference(hourList[0][0])
+    next.next_in_stop = {name: busLine.statii[filterDay].in_stop_name, hour: hourList[0][0], remainingMin}
+  }
+  if (hourList[0][1] < timeNow && !next.next_out_stop) {
+    const remainingMin = calculateTimeDifference(hourList[0][1])
+    next.next_out_stop = {name: busLine.statii[filterDay].out_stop_name, hour: hourList[0][1], remainingMin}
+  }
   hourList.map(hours => {
     if (hours[0] > timeNow && !next.next_in_stop) {
       const remainingMin = calculateTimeDifference(hours[0])
