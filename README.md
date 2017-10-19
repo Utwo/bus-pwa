@@ -1,6 +1,10 @@
-# bus-pwa
+# Cluj Bus
 
-> A simple bus schedule pwa app.
+A simple bus schedule pwa app made in Vue.
+This app lets you to:
+  * find schedule and route information about buses in Cluj-Napoca
+  * add bus lines to favorites
+  * use the app offline
 
 ## Build Setup
 
@@ -18,4 +22,13 @@ npm run build
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Backend JSON data
+This project make use of [CTP CJ Scrapper](https://github.com/Utwo/ctpcj-scrapper), 
+a great node utility that scrap [ctp website](http://ctpcj.ro/) and 
+save bus lines and route information to json file  
+
+Clone that open source project to generate real data.
+
+## Credits
+Loading animation from:
+https://codepen.io/andersschmidt/pen/NPVPYP

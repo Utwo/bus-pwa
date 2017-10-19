@@ -4,6 +4,7 @@ import BusLines from '../components/BusLines.vue'
 import BusInformation from '../components/BusInformation.vue'
 import Favorite from '../components/Favorite.vue'
 import About from '../components/About.vue'
+import NotFound from '../components/NotFound.vue'
 
 Vue.use(Router)
 
@@ -29,6 +30,14 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/404',
+      component: NotFound
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
   ]
 })
