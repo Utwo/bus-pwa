@@ -4,14 +4,15 @@
     no-data-text="Nu sunt date disponibile"
     :items="lines"
     class="elevation-0 text-xs-center bus-table"
+    id="bus-table"
   >
-    <template slot="headers" scope="props">
+    <template slot="headers" slot-scope="props">
       <tr>
         <th>{{ inStopName }}</th>
         <th>{{ outStopName }}</th>
       </tr>
     </template>
-    <template slot="items" scope="props">
+    <template slot="items" slot-scope="props">
       <td>{{ props.item[0] }}</td>
       <td>{{ props.item[1] }}</td>
     </template>

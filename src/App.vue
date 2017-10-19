@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <TheNavigation></TheNavigation>
     <v-layout row>
       <v-flex xs12 md8 offset-md2>
@@ -8,7 +8,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-  </div>
+  </v-app>
 </template>
 
 <script>
