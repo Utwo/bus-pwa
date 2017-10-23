@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-once>
     <h4 class="grey--text text--lighten-1">About</h4>
     <p>A simple bus schedule pwa app made in Vue.</p>
     <p>This app lets you to:</p>

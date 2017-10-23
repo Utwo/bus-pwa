@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-once>
     <h4 class="grey--text text--lighten-1 text-xs-center py-3">404<br>No route found</h4>
     <v-divider class="my-4"></v-divider>
     <div class="text-xs-center">

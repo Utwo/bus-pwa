@@ -19,12 +19,12 @@
                 <v-icon :class="typeStyleClass(bus.type)" class="pa-1 mr-2 white--text">directions_transit</v-icon>
                 {{ bus.name }}
               </h2>
-              <p v-if="bus.next_in_stop">{{ bus.next_in_stop.name
+              <p v-if="bus.next_in_stop">{{ bus.in_stop_name
                 }} : {{ bus.next_in_stop.hour
                 }} in aprox
                 <v-chip class="primary white--text">{{ bus.next_in_stop.remainingMin }}</v-chip>
               </p>
-              <p v-if="bus.next_out_stop">{{ bus.next_out_stop.name
+              <p v-if="bus.next_out_stop">{{ bus.out_stop_name
                 }} : {{ bus.next_out_stop.hour
                 }} in aprox
                 <v-chip class="secondary white--text">{{ bus.next_out_stop.remainingMin }}</v-chip>
@@ -64,8 +64,11 @@
     computed: {
       favoriteBusesWithStop () {
         if (this.favoriteBuses.length !== 0) {
+          const todayAbbreviation = commonFunctions.getDayAbbreviation()
           this.favoriteBuses.map(favorite => {
-            Object.assign(favorite, commonFunctions.calculateNextStationTime(favorite))
+            const todayHourList = commonFunctions.getTodayHourList(favorite)
+            const {in_stop_name, out_stop_name} = favorite.statii[todayAbbreviation]
+            Object.assign(favorite, commonFunctions.calculateNextStationTime(todayHourList), {in_stop_name, out_stop_name})
           })
         }
         return this.favoriteBuses
@@ -79,9 +82,6 @@
           'orange': transportationType === 'microbuze',
           'pink': transportationType === 'troleibuze'
         }
-      },
-      swipe () {
-        this.$router.push('/')
       },
       async fetchData () {
         this.favoriteBuses = await LineService.getFavorites()

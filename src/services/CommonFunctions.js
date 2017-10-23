@@ -10,7 +10,7 @@ function calculateTimeDifference (timeString) {
   const time = timeString.split(':')
   let nextStopStation = new Date()
   nextStopStation.setHours(time[0], time[1])
-  if (todayDate.getHours() > time[0]) {
+  if (('0' + todayDate.getHours()).slice(-2) > time[0]) {
     nextStopStation.setDate(todayDate.getDate() + 1)
   }
   const diff = Math.abs(todayDate - nextStopStation)
@@ -20,22 +20,40 @@ function calculateTimeDifference (timeString) {
   return hours !== 0 ? hours + ':' + minutes : minutes + ' min'
 }
 
-function calculateNextStationTime (busLine) {
-  const hourList = busLine.statii[filterDay].linies
-  const timeNow = todayDate.getHours() + ':' + todayDate.getMinutes()
+function getDayAbbreviation () {
+  return filterDay
+}
+
+function getTodayHourList (busItem) {
+  return busItem.statii[filterDay].linies ? busItem.statii[filterDay].linies : null
+}
+
+function calculateNextStationTime (hourList) {
+  if (hourList.length === 0) {
+    return
+  }
+  const timeNow = ('0' + todayDate.getHours()).slice(-2) + ':' + todayDate.getMinutes()
   const next = {}
   hourList.map(hours => {
     if (hours[0] > timeNow && !next.next_in_stop) {
       const remainingMin = calculateTimeDifference(hours[0])
-      next.next_in_stop = {name: busLine.statii[filterDay].in_stop_name, hour: hours[0], remainingMin}
+      next.next_in_stop = {hour: hours[0], remainingMin}
     }
     if (hours[1] > timeNow && !next.next_out_stop) {
       const remainingMin = calculateTimeDifference(hours[1])
-      next.next_out_stop = {name: busLine.statii[filterDay].out_stop_name, hour: hours[1], remainingMin}
+      next.next_out_stop = {hour: hours[1], remainingMin}
     }
   })
+  if (!next.next_in_stop) {
+    const remainingMin = calculateTimeDifference(hourList[0][0])
+    next.next_in_stop = {hour: hourList[0][0], remainingMin}
+  }
+  if (!next.next_out_stop) {
+    const remainingMin = calculateTimeDifference(hourList[0][1])
+    next.next_out_stop = {hour: hourList[0][1], remainingMin}
+  }
   return next
 }
 
-export default {calculateNextStationTime}
+export default {calculateNextStationTime, getDayAbbreviation, getTodayHourList}
 
