@@ -52,6 +52,14 @@ function getFavorites () {
   return Promise.all(favorites)
 }
 
+function isFavorite (lineNumber) {
+  if (!localStorage.getItem('myFavorites')) {
+    return false
+  }
+  const favoriteNameList = JSON.parse(localStorage.getItem('myFavorites'))
+  return favoriteNameList.indexOf(lineNumber) >= 0
+}
+
 function transformBusesResponse (buses) {
   const newResponse = []
   for (let busesLines of Object.entries(buses)) {
@@ -63,5 +71,5 @@ function transformBusesResponse (buses) {
   return newResponse
 }
 
-export default {getBusesDetail, getBusesBasic, getLine, addToFavorite, getFavorites}
+export default {getBusesDetail, getBusesBasic, getLine, addToFavorite, getFavorites, isFavorite}
 

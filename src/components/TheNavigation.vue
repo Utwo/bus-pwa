@@ -3,16 +3,24 @@
     <v-toolbar class="green lighten-2 white--text">
       <v-toolbar-side-icon @click="showNavigation = !showNavigation"></v-toolbar-side-icon>
       <v-toolbar-title>Cluj BUS</v-toolbar-title>
-      <v-text-field  solo
-                     prepend-icon="search"
-                     placeholder="Search"
-                     name="filter"
-                     type="text"
-                     class="mx-5 green lighten-1 elevation-0 white--text"
-                     style="max-width: 800px"
-      ></v-text-field>
+      <v-select
+        solo
+        prepend-icon="search"
+        placeholder="Search"
+        autocomplete
+        class="mx-5 green lighten-1 elevation-0 white--text"
+        style="max-width: 800px"
+        dark
+        cache-items
+        :items="busLines"
+        v-model="select"
+        @change="redirectTo"
+        item-text="name"
+        return-object
+        tabindex="1"
+      ></v-select>
       <v-spacer></v-spacer>
-      <v-menu bottom right :nudge-width="100">
+      <v-menu offset-y :nudge-width="100">
         <v-btn icon slot="activator">
           <v-icon>more_vert</v-icon>
         </v-btn>
@@ -24,7 +32,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-if="showNavigation">
+        <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-if="showNavigation">
         <v-tabs-slider class="cyan"></v-tabs-slider>
         <v-tabs-item to="/" router>
           <v-icon class="green--text">directions_bus</v-icon>
@@ -40,11 +48,24 @@
 </template>
 
 <script>
+  import LineService from '../services/LineService'
   export default {
     name: 'TheNavigation',
     data () {
       return {
-        showNavigation: true
+        showNavigation: true,
+        select: null,
+        busLines: []
+      }
+    },
+    async created () {
+      this.busLines = await LineService.getBusesBasic()
+    },
+    methods: {
+      redirectTo (busItem) {
+        if (busItem.name) {
+          this.$router.push('/bus/' + busItem.name)
+        }
       }
     }
   }

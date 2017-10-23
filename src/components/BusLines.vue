@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-touch="{left: () => this.$router.push('/favorite')}"
+  >
     <v-container fluid>
       <v-layout row wrap>
         <v-flex xs6 sm3 md3>

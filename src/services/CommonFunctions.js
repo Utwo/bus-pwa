@@ -8,22 +8,22 @@ const filterDay = filterTodayConst[todayDate] ? filterTodayConst[todayDate] : 'l
 
 function calculateTimeDifference (timeString) {
   const time = timeString.split(':')
-  const diff = Math.abs(todayDate - new Date().setHours(time[0], time[1]))
-  return Math.floor((diff / 1000) / 60)
+  let nextStopStation = new Date()
+  nextStopStation.setHours(time[0], time[1])
+  if (todayDate.getHours() > time[0]) {
+    nextStopStation.setDate(todayDate.getDate() + 1)
+  }
+  const diff = Math.abs(todayDate - nextStopStation)
+  let minutes = Math.floor((diff / 1000) / 60)
+  const hours = Math.trunc(minutes / 60)
+  minutes %= 60
+  return hours !== 0 ? hours + ':' + minutes : minutes + ' min'
 }
 
 function calculateNextStationTime (busLine) {
   const hourList = busLine.statii[filterDay].linies
   const timeNow = todayDate.getHours() + ':' + todayDate.getMinutes()
   const next = {}
-  if (hourList[0][0] < timeNow && !next.next_in_stop) {
-    const remainingMin = calculateTimeDifference(hourList[0][0])
-    next.next_in_stop = {name: busLine.statii[filterDay].in_stop_name, hour: hourList[0][0], remainingMin}
-  }
-  if (hourList[0][1] < timeNow && !next.next_out_stop) {
-    const remainingMin = calculateTimeDifference(hourList[0][1])
-    next.next_out_stop = {name: busLine.statii[filterDay].out_stop_name, hour: hourList[0][1], remainingMin}
-  }
   hourList.map(hours => {
     if (hours[0] > timeNow && !next.next_in_stop) {
       const remainingMin = calculateTimeDifference(hours[0])

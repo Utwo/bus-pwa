@@ -1,5 +1,6 @@
 <template>
-  <div v-if="busItem">
+  <div>
+    <div v-if="busItem && !isLoading">
     <v-toolbar card class="white" prominent>
       <v-toolbar-title
         class="grey--text text--darken-4 headline">
@@ -7,8 +8,8 @@
       </v-toolbar-title>
         <v-subheader class="grey--text">&nbsp;&nbsp;&nbsp; {{ busItem.type }} / {{ busItem.route }}</v-subheader>
       <v-spacer></v-spacer>
-      <v-btn icon @click="addToFavorite" class="avatar green">
-        <v-icon class="white--text">favorite</v-icon>
+      <v-btn fab small color="pink" :dark="!isFavorite" :outline="isFavorite" @click="addToFavorite">
+        <v-icon>favorite</v-icon>
       </v-btn>
     </v-toolbar>
     <v-divider class="grey lighten-3"></v-divider>
@@ -52,48 +53,47 @@
         </v-tabs-content>
       </v-tabs-items>
     </v-tabs>
-    <v-bottom-nav :value="true" :active.sync="e1" class="white bottom-nav--cutom" >
-      <v-btn flat color="teal" value="lv">
-        <span>Luni-Vineri</span>
-        <v-icon>history</v-icon>
-      </v-btn>
-      <v-btn flat color="teal" value="s">
-        <span>Sambata</span>
-        <v-icon>favorite</v-icon>
-      </v-btn>
-      <v-btn flat color="teal" value="d">
-        <span>Duminica</span>
-        <v-icon>place</v-icon>
-      </v-btn>
-    </v-bottom-nav>
+  </div>
+    <BaseLoading v-if="isLoading" />
   </div>
 </template>
-
 
 <script>
   import LineService from '../services/LineService'
   import BusTable from './shared/BusTable'
+  import BaseLoading from './shared/BaseLoading'
 
   export default {
     name: 'BusInformation',
     data () {
       return {
         busItem: null,
-        e1: 'lv'
+        e1: 'lv',
+        isFavorite: false,
+        isLoading: true
       }
     },
     components: {
-      BusTable
+      BusTable, BaseLoading
     },
-    created () {
-      this.fetchData()
+    async created () {
+      await this.fetchData()
+      this.isFavorite = LineService.isFavorite(this.busItem.name)
+    },
+    async beforeRouteUpdate (to, from, next) {
+      this.isLoading = true
+      next()
+      await this.fetchData()
+      this.isFavorite = LineService.isFavorite(this.busItem.name)
     },
     methods: {
       async fetchData () {
         this.busItem = await LineService.getLine(this.$route.params.line)
+        this.isLoading = false
       },
       addToFavorite () {
         LineService.addToFavorite(this.$route.params.line)
+        this.isFavorite = !this.isFavorite
       }
     }
   }

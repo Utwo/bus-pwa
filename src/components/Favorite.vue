@@ -2,8 +2,12 @@
   <v-container
     fluid
     grid-list-lg
+    v-touch="{right: () => this.$router.push('/')}"
   >
-    <v-layout row wrap v-if="!isLoading">
+    <v-layout
+      row wrap
+      v-if="!isLoading"
+    >
       <v-flex xs12
               v-for="bus in favoriteBusesWithStop"
               v-if="favoriteBusesWithStop.length !== 0"
@@ -39,8 +43,8 @@
 </template>
 
 <script>
-  import LineService from '../services/LineService'
-  import commonFunctions from '../services/CommonFunctions'
+  import LineService from '../services/LineService.js'
+  import commonFunctions from '../services/CommonFunctions.js'
   import BaseLoading from './shared/BaseLoading'
 
   export default {
@@ -75,6 +79,9 @@
           'orange': transportationType === 'microbuze',
           'pink': transportationType === 'troleibuze'
         }
+      },
+      swipe () {
+        this.$router.push('/')
       },
       async fetchData () {
         this.favoriteBuses = await LineService.getFavorites()
