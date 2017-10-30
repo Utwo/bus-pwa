@@ -1,26 +1,20 @@
-import axios from 'axios'
-
-const HTTP = axios.create({
-  baseURL: process.env.API_URL
-})
-
 const loadedData = { line: [] }
 
 async function getBusesDetail () {
   if (loadedData.busesDetail) {
     return loadedData.busesDetail
   }
-  const response = await HTTP.get('busses_detail.json')
-  loadedData.busesDetail = transformBusesResponse(response.data)
-  return response.data
+  const response = await fetch.get(`${process.env.API_URL}/busses_detail.json`)
+  loadedData.busesDetail = transformBusesResponse(await response.json())
+  return response.body
 }
 
 async function getBusesBasic () {
   if (loadedData.busesBasic) {
     return loadedData.busesBasic
   }
-  const response = await HTTP.get('busses_basic.json')
-  loadedData.busesBasic = transformBusesResponse(response.data)
+  const response = await fetch(`${process.env.API_URL}/busses_basic.json`)
+  loadedData.busesBasic = transformBusesResponse(await response.json())
   return loadedData.busesBasic
 }
 
@@ -28,9 +22,9 @@ async function getLine (lineName) {
   if (loadedData.line[lineName]) {
     return loadedData.line[lineName]
   }
-  const response = await HTTP.get(lineName + '.json')
-  loadedData.line[lineName] = response.data
-  return response.data
+  const response = await fetch(`${process.env.API_URL}/${lineName}.json`)
+  loadedData.line[lineName] = await response.json()
+  return loadedData.line[lineName]
 }
 
 function addToFavorite (lineNumber) {
