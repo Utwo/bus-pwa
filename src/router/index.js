@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import BusLines from '../components/BusLines.vue'
 import BusInformation from '../components/BusInformation.vue'
 import Favorite from '../components/Favorite.vue'
-import About from '../components/About.vue'
-import NotFound from '../components/NotFound.vue'
+
+const About = () => import('../components/About.vue')
+const NotFound = () => import('../components/NotFound.vue')
 
 Vue.use(Router)
 
