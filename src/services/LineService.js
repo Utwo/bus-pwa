@@ -4,7 +4,7 @@ async function getBusesDetail () {
   if (loadedData.busesDetail) {
     return loadedData.busesDetail
   }
-  const response = await fetch.get(`${process.env.API_URL}/busses_detail.json`)
+  const response = await fetch(`${process.env.API_URL}/buses_detail.json`)
   loadedData.busesDetail = transformBusesResponse(await response.json())
   return response.body
 }
@@ -13,7 +13,7 @@ async function getBusesBasic () {
   if (loadedData.busesBasic) {
     return loadedData.busesBasic
   }
-  const response = await fetch(`${process.env.API_URL}/busses_basic.json`)
+  const response = await fetch(`${process.env.API_URL}/buses_basic.json`)
   loadedData.busesBasic = transformBusesResponse(await response.json())
   return loadedData.busesBasic
 }
@@ -61,7 +61,7 @@ function transformBusesResponse (buses) {
   const newResponse = []
   for (let busesLines of Object.entries(buses)) {
     busesLines[1].map(bus => {
-      bus.linieType = busesLines[0]
+      bus.lineType = busesLines[0]
       newResponse.push(bus)
     })
   }

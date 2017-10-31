@@ -5,26 +5,26 @@
     :items="hourList"
     class="elevation-0 text-xs-center bus-table"
   >
-    <template slot="headers" slot-scope="props">
-      <tr>
+      <tr slot="headers" slot-scope="props">
         <th>{{ inStopName }}</th>
         <th>{{ outStopName }}</th>
       </tr>
-    </template>
-    <template slot="items" slot-scope="props">
-      <td :class="{
+    <tr slot="items" slot-scope="props">
+      <td
+        :class="{
         'green--text': props.item[0] >= nextInStopHour,
-        'scroll-here': props.item[0] >= nextInStopHour
+        'scroll-here': props.item[0] === nextInStopHour
       }">
         {{ props.item[0] }}
       </td>
-      <td :class="{
+      <td
+        :class="{
         'green--text': props.item[1] >= nextOutStopHour,
-        'scroll-here': props.item[1] >= nextOutStopHour
+        'scroll-here': props.item[1] === nextOutStopHour
       }">
         {{ props.item[1] }}
       </td>
-    </template>
+    </tr>
   </v-data-table>
 </template>
 

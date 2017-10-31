@@ -20,9 +20,7 @@
     </v-container>
     <div>
       <BaseList :list="filteredBuses" v-if="!isLoading">
-        <template slot-scope="bus">
-          <BaseListItem :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
-        </template>
+        <BaseListItem slot-scope="bus" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
       </BaseList>
       <BaseLoading v-if="isLoading" />
     </div>
