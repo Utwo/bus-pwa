@@ -15,7 +15,6 @@
   import TheNavigation from './components/TheNavigation'
 
   export default {
-    name: 'app',
     components: {
       TheNavigation
     }

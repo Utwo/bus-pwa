@@ -22,7 +22,6 @@
 
 <script>
   export default {
-    name: 'BaseListItem',
     props: {
       title: {
         type: String,

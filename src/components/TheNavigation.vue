@@ -49,8 +49,8 @@
 
 <script>
   import LineService from '../services/LineService'
+
   export default {
-    name: 'TheNavigation',
     data () {
       return {
         showNavigation: true,

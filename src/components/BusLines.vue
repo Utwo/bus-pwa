@@ -32,8 +32,8 @@
   import BaseList from './shared/BaseList'
   import BaseListItem from './shared/BaseListItem'
   import BaseLoading from './shared/BaseLoading'
+
   export default {
-    name: 'BusLines',
     data () {
       return {
         buses: [],

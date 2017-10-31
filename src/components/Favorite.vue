@@ -48,7 +48,6 @@
   import BaseLoading from './shared/BaseLoading'
 
   export default {
-    name: 'Favorite',
     data () {
       return {
         favoriteBuses: [],
