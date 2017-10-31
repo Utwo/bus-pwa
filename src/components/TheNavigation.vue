@@ -13,7 +13,6 @@
         dark
         cache-items
         :items="busLines"
-        v-model="select"
         @change="redirectTo"
         item-text="name"
         return-object
@@ -54,7 +53,6 @@
     data () {
       return {
         showNavigation: true,
-        select: null,
         busLines: []
       }
     },
