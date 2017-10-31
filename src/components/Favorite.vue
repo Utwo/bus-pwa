@@ -66,9 +66,9 @@
         if (this.favoriteBuses.length !== 0) {
           const todayAbbreviation = commonFunctions.getDayAbbreviation()
           this.favoriteBuses.map(favoriteBusName => {
-            if (favoriteBusName.statii[todayAbbreviation]) {
+            if (favoriteBusName.station[todayAbbreviation]) {
               const todayHourList = commonFunctions.getTodayHourList(favoriteBusName)
-              const {in_stop_name, out_stop_name} = favoriteBusName.statii[todayAbbreviation]
+              const {in_stop_name, out_stop_name} = favoriteBusName.station[todayAbbreviation]
               Object.assign(favoriteBusName, commonFunctions.calculateNextStationTime(todayHourList), {in_stop_name, out_stop_name})
             }
           })

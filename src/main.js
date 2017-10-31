@@ -18,13 +18,11 @@ import VDataTable from 'vuetify/es5/components/VDataTable'
 import VChip from 'vuetify/es5/components/VChip'
 import VSelect from 'vuetify/es5/components/VSelect'
 import Touch from 'vuetify/es5/directives/touch'
-import VueScrollTo from 'vue-scrollto'
 import App from './App.vue'
 import router from './router'
 import './assets/main.styl'
 
 Vue.config.productionTip = false
-Vue.use(VueScrollTo)
 Vue.use(Vuetify,
   {
     components: {

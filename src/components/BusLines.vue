@@ -21,7 +21,7 @@
     <div>
       <BaseList :list="filteredBuses" v-if="!isLoading">
         <template slot-scope="bus">
-          <BaseListItem :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.linieType"></BaseListItem>
+          <BaseListItem :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
         </template>
       </BaseList>
       <BaseLoading v-if="isLoading" />
@@ -46,7 +46,7 @@
     components: {
       BaseList, BaseListItem, BaseLoading
     },
-    mounted () {
+    created () {
       this.fetchData()
     },
     computed: {

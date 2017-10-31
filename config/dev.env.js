@@ -3,5 +3,5 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_URL: '"https://static-zvlclbozep.now.sh"'
+  API_URL: '"https://ctpcj-snewwkrodh.now.sh"'
 })

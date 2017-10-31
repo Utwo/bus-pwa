@@ -6,49 +6,49 @@
           class="grey--text text--darken-4 headline">
           {{ busItem.name }}
         </v-toolbar-title>
-        <v-subheader class="grey--text">&nbsp;&nbsp;&nbsp; {{ busItem.type }} / {{ busItem.route }}</v-subheader>
+        <v-subheader class="grey--text">{{ busItem.type }} / {{ busItem.route }}</v-subheader>
         <v-spacer></v-spacer>
         <v-btn fab small color="pink" :dark="!isFavorite" :outline="isFavorite" @click="addToFavorite">
           <v-icon>favorite</v-icon>
         </v-btn>
       </v-toolbar>
       <v-divider class="grey lighten-3"></v-divider>
-      <v-tabs grow v-model="current_key">
+      <v-tabs grow v-model="current_key" @input="scrollTo">
         <v-tabs-bar class="white">
           <v-tabs-slider class="yellow"></v-tabs-slider>
-          <v-tabs-item v-if="busItem.statii.lv" :href="'#tab-lv'">Luni-Vineri</v-tabs-item>
-          <v-tabs-item v-if="busItem.statii.s" :href="'#tab-s'">Sambata</v-tabs-item>
-          <v-tabs-item v-if="busItem.statii.d" :href="'#tab-d'">Duminica</v-tabs-item>
+          <v-tabs-item v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tabs-item>
+          <v-tabs-item v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tabs-item>
+          <v-tabs-item v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tabs-item>
         </v-tabs-bar>
         <v-tabs-items class="white">
           <v-tabs-content
             :id="'tab-lv'"
-            v-if="busItem.statii.lv"
+            v-if="busItem.station.lv"
           >
             <BusTable
-              :hourList="busItem.statii.lv.linies"
-              :inStopName="busItem.statii.lv.in_stop_name"
-              :outStopName="busItem.statii.lv.out_stop_name">
+              :hourList="busItem.station.lv.lines"
+              :inStopName="busItem.station.lv.in_stop_name"
+              :outStopName="busItem.station.lv.out_stop_name">
             </BusTable>
           </v-tabs-content>
           <v-tabs-content
             :id="'tab-s'"
-            v-if="busItem.statii.s"
+            v-if="busItem.station.s"
           >
             <BusTable
-              :hourList="busItem.statii.s.linies"
-              :inStopName="busItem.statii.s.in_stop_name"
-              :outStopName="busItem.statii.s.out_stop_name">
+              :hourList="busItem.station.s.lines"
+              :inStopName="busItem.station.s.in_stop_name"
+              :outStopName="busItem.station.s.out_stop_name">
             </BusTable>
           </v-tabs-content>
           <v-tabs-content
             :id="'tab-d'"
-            v-if="busItem.statii.d"
+            v-if="busItem.station.d"
           >
             <BusTable
-              :hourList="busItem.statii.d.linies"
-              :inStopName="busItem.statii.d.in_stop_name"
-              :outStopName="busItem.statii.d.out_stop_name">
+              :hourList="busItem.station.d.lines"
+              :inStopName="busItem.station.d.in_stop_name"
+              :outStopName="busItem.station.d.out_stop_name">
             </BusTable>
           </v-tabs-content>
         </v-tabs-items>
@@ -70,7 +70,15 @@
         busItem: null,
         isFavorite: false,
         isLoading: true,
-        current_key: null
+        current_key: null,
+        currentDayAbbreviation: CommonFunctions.getDayAbbreviation()
+      }
+    },
+    watch: {
+      busItem: function (newBusItem) {
+        if (newBusItem.station[this.currentDayAbbreviation]) {
+          this.current_key = `tab-${this.currentDayAbbreviation}`
+        }
       }
     },
     components: {
@@ -80,10 +88,6 @@
       await this.fetchData()
       this.isFavorite = LineService.isFavorite(this.$route.params.line)
       this.scrollTo()
-      const dayAbbreviation = CommonFunctions.getDayAbbreviation()
-      if (this.busItem.statii[dayAbbreviation]) {
-        this.current_key = `tab-${dayAbbreviation}`
-      }
     },
     async beforeRouteUpdate (to, from, next) {
       this.isLoading = true
@@ -106,12 +110,9 @@
       },
       scrollTo () {
         this.$nextTick(function () {
-          const options = {
-            container: '.bus-table',
-            offset: -300
-          }
           setTimeout(() => {
-            this.$scrollTo('.bus-table tbody tr .scroll-here', 500, options)
+            const scrollHereElement = document.getElementById(this.current_key).getElementsByClassName('scroll-here')[0]
+            scrollHereElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'start'})
           }, 500)
         })
       }

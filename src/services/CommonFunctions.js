@@ -25,7 +25,7 @@ function getDayAbbreviation () {
 }
 
 function getTodayHourList (busItem) {
-  return busItem.statii[filterDay] ? busItem.statii[filterDay].linies : null
+  return busItem.station[filterDay] ? busItem.station[filterDay].lines : null
 }
 
 function calculateNextStationTime (hourList) {

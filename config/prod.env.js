@@ -1,4 +1,4 @@
 module.exports = {
   NODE_ENV: '"production"',
-  API_URL: '"https://static-zvlclbozep.now.sh"'
+  API_URL: '"https://ctpcj-snewwkrodh.now.sh"'
 }
