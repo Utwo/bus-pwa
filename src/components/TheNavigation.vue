@@ -1,5 +1,5 @@
 <template>
-  <v-tabs light fixed icons grow :scrollable="false" class="navigation">
+  <v-tabs light fixed icons grow :scrollable="false" class="navigation" :class="{'hide-navigation': !showNavigation}">
     <v-toolbar class="green lighten-2 white--text">
       <v-toolbar-side-icon @click="showNavigation = !showNavigation"></v-toolbar-side-icon>
       <v-toolbar-title>Cluj BUS</v-toolbar-title>
@@ -14,6 +14,7 @@
         cache-items
         :items="busLines"
         @change="redirectTo"
+        @focus="focusSelect"
         item-text="name"
         return-object
         tabindex="1"
@@ -31,7 +32,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-        <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-if="showNavigation">
+      <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-show="showNavigation">
         <v-tabs-slider class="cyan"></v-tabs-slider>
         <v-tabs-item to="/" router>
           <v-icon class="green--text">directions_bus</v-icon>
@@ -56,10 +57,12 @@
         busLines: []
       }
     },
-    async created () {
-      this.busLines = await LineService.getBusesBasic()
-    },
     methods: {
+      async focusSelect () {
+        if (this.busLines.length === 0) {
+          this.busLines = await LineService.getBusesBasic()
+        }
+      },
       redirectTo (busItem) {
         if (busItem.name) {
           this.$router.push('/bus/' + busItem.name)

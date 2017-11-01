@@ -17,6 +17,7 @@ import VCheckbox from 'vuetify/es5/components/VCheckbox'
 import VDataTable from 'vuetify/es5/components/VDataTable'
 import VChip from 'vuetify/es5/components/VChip'
 import VSelect from 'vuetify/es5/components/VSelect'
+import VProgressLinear from 'vuetify/es5/components/VProgressLinear'
 import Touch from 'vuetify/es5/directives/touch'
 import App from './App.vue'
 import router from './router'
@@ -42,6 +43,7 @@ Vue.use(Vuetify,
       VSubheader,
       VCheckbox,
       VGrid,
+      VProgressLinear,
       VBtn
     },
     directives: {
