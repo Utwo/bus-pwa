@@ -5,22 +5,22 @@
     :items="hourList"
     class="elevation-0 text-xs-center bus-table"
   >
-      <tr slot="headers" slot-scope="props">
-        <th>{{ inStopName }}</th>
-        <th>{{ outStopName }}</th>
-      </tr>
+    <tr slot="headers" slot-scope="props">
+      <th>{{ inStopName }}</th>
+      <th>{{ outStopName }}</th>
+    </tr>
     <tr slot="items" slot-scope="props">
       <td
         :class="{
-        'green--text': props.item[0] >= nextInStopHour,
-        'scroll-here': props.item[0] === nextInStopHour
+        'green--text': props.item[0] >= nextInStopTime,
+        'scroll-here': props.item[0] === nextInStopTime
       }">
         {{ props.item[0] }}
       </td>
       <td
         :class="{
-        'green--text': props.item[1] >= nextOutStopHour,
-        'scroll-here': props.item[1] === nextOutStopHour
+        'green--text': props.item[1] >= nextOutStopTime,
+        'scroll-here': props.item[1] === nextOutStopTime
       }">
         {{ props.item[1] }}
       </td>
@@ -30,6 +30,7 @@
 
 <script>
   import commonFunctions from '../../services/CommonFunctions'
+  import format from 'date-fns/format'
 
   export default {
     props: {
@@ -48,15 +49,15 @@
     },
     data () {
       return {
-        nextInStopHour: null,
-        nextOutStopHour: null
+        nextInStopTime: null,
+        nextOutStopTime: null
       }
     },
     mounted () {
       if (this._props.hourList.length > 0) {
         const nextStationTime = commonFunctions.calculateNextStationTime(this._props.hourList)
-        this.nextInStopHour = nextStationTime.next_in_stop.hour
-        this.nextOutStopHour = nextStationTime.next_out_stop.hour
+        this.nextInStopTime = format(nextStationTime.next_in_stop.nextDateTime, 'HH:mm')
+        this.nextOutStopTime = format(nextStationTime.next_out_stop.nextDateTime, 'HH:mm')
       }
     }
   }

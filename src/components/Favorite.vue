@@ -12,7 +12,7 @@
               v-for="bus in favoriteBuses"
               v-if="favoriteBuses.length !== 0"
               :key="bus.name" :to="'bus/' + bus.name">
-        <favorite-item :bus="bus"></favorite-item>
+        <favorite-item :bus="bus" :now="now"></favorite-item>
       </v-flex>
       <v-flex xs12 v-if="favoriteBuses.length === 0" class="text-xs-center py-4">
         <h4 class="grey--text text--lighten-1">No favorites</h4>
@@ -33,7 +33,9 @@
     data () {
       return {
         favoriteBuses: [],
-        isLoading: true
+        isLoading: true,
+        timer: null,
+        now: Date.now()
       }
     },
     components: {
@@ -43,6 +45,12 @@
     },
     created () {
       this.fetchData()
+      this.timer = setInterval(() => {
+        this.now = Date.now()
+      }, 6000)
+    },
+    beforeDestroy () {
+      clearInterval(this.timer)
     },
     methods: {
       async fetchData () {

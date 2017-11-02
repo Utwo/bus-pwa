@@ -11,15 +11,15 @@
         <v-flex xs6>
           <p v-if="busWithStop.next_in_stop">
             {{ busWithStop.in_stop_name }} <br>
-            {{ busWithStop.next_in_stop.hour}} # <v-chip class="cyan lighten-4">{{ busWithStop.next_in_stop.remainingMin }}</v-chip>
-            <v-progress-linear v-model="busWithStop.progress_in_stop"></v-progress-linear>
+            {{ busWithStop.next_in_stop.formatTime }} <span class="grey--text text--lighten-1">#</span> <v-chip class="cyan lighten-4">{{ busWithStop.next_in_stop.remainingTime }}</v-chip>
+            <v-progress-linear v-model="busWithStop.next_in_stop.progress"></v-progress-linear>
           </p>
         </v-flex>
         <v-flex xs6>
           <p v-if="busWithStop.next_out_stop">
             {{ busWithStop.out_stop_name }} <br>
-            {{ busWithStop.next_out_stop.hour }} # <v-chip color="red lighten-4">{{ busWithStop.next_out_stop.remainingMin }}</v-chip>
-            <v-progress-linear v-model="busWithStop.progress_out_stop"></v-progress-linear>
+            {{ busWithStop.next_out_stop.formatTime }} <span class="grey--text text--lighten-1">#</span> <v-chip color="red lighten-4">{{ busWithStop.next_out_stop.remainingTime }}</v-chip>
+            <v-progress-linear v-model="busWithStop.next_out_stop.progress"></v-progress-linear>
           </p>
         </v-flex>
       </v-layout>
@@ -35,18 +35,18 @@
       bus: {
         type: Object,
         required: true
-      }
+      },
+      now: Number
     },
     computed: {
       busWithStop () {
+        console.debug(this.now) // keep this to force computed update
         const todayAbbreviation = commonFunctions.getDayAbbreviation()
         if (this.bus.station[todayAbbreviation]) {
           const {in_stop_name, out_stop_name} = this.bus.station[todayAbbreviation]
           const todayHourList = commonFunctions.getTodayHourList(this.bus)
-          const busWithStop = Object.assign(this.bus, commonFunctions.calculateNextStationTime(todayHourList), {in_stop_name, out_stop_name})
-          busWithStop.progress_out_stop = commonFunctions.calculateProgress(busWithStop.current_out_stop.hour, busWithStop.next_out_stop.hour)
-          busWithStop.progress_in_stop = commonFunctions.calculateProgress(busWithStop.current_in_stop.hour, busWithStop.next_in_stop.hour)
-          return busWithStop
+          const nextStation = commonFunctions.calculateNextStationTime(todayHourList)
+          return Object.assign(this.bus, nextStation, {in_stop_name, out_stop_name})
         }
         return this.bus
       }
