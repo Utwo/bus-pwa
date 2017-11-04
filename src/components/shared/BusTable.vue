@@ -3,7 +3,7 @@
     hide-actions
     no-data-text="Nu sunt date disponibile"
     :items="hourList"
-    class="elevation-0 text-xs-center bus-table text"
+    class="elevation-0 text-xs-center bus-table"
   >
     <template slot="headers" slot-scope="props">
       <tr>

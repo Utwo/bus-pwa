@@ -23,6 +23,9 @@ async function getLine (lineName) {
     return loadedData.line[lineName]
   }
   const response = await fetch(`${process.env.API_URL}/${lineName}.json`)
+  if (response.status !== 200) {
+    return
+  }
   loadedData.line[lineName] = await response.json()
   return loadedData.line[lineName]
 }

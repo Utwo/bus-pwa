@@ -13,7 +13,7 @@
         </v-btn>
       </v-toolbar>
       <v-divider class="grey lighten-3"></v-divider>
-      <v-tabs grow>
+      <v-tabs grow v-model="current_key">
         <v-tabs-bar class="white">
           <v-tabs-slider class="yellow"></v-tabs-slider>
           <v-tabs-item v-if="busItem.statii.lv" :href="'#tab-lv'">Luni-Vineri</v-tabs-item>
@@ -60,6 +60,7 @@
 
 <script>
   import LineService from '../services/LineService'
+  import CommonFunctions from '../services/CommonFunctions'
   import BusTable from './shared/BusTable'
   import BaseLoading from './shared/BaseLoading'
 
@@ -67,9 +68,9 @@
     data () {
       return {
         busItem: null,
-        e1: 'lv',
         isFavorite: false,
-        isLoading: true
+        isLoading: true,
+        current_key: null
       }
     },
     components: {
@@ -77,19 +78,26 @@
     },
     async created () {
       await this.fetchData()
-      this.isFavorite = LineService.isFavorite(this.busItem.name)
+      this.isFavorite = LineService.isFavorite(this.$route.params.line)
       this.scrollTo()
+      const dayAbbreviation = CommonFunctions.getDayAbbreviation()
+      if (this.busItem.statii[dayAbbreviation]) {
+        this.current_key = `tab-${dayAbbreviation}`
+      }
     },
     async beforeRouteUpdate (to, from, next) {
       this.isLoading = true
       next()
       await this.fetchData()
-      this.isFavorite = LineService.isFavorite(this.busItem.name)
+      this.isFavorite = LineService.isFavorite(this.$route.params.line)
       this.scrollTo()
     },
     methods: {
       async fetchData () {
         this.busItem = await LineService.getLine(this.$route.params.line)
+        if (!this.busItem) {
+          this.$router.push('/not-found')
+        }
         this.isLoading = false
       },
       addToFavorite () {
@@ -102,7 +110,9 @@
             container: '.bus-table',
             offset: -300
           }
-          this.$scrollTo('.bus-table tbody tr .scroll-here', 500, options)
+          setTimeout(() => {
+            this.$scrollTo('.bus-table tbody tr .scroll-here', 500, options)
+          }, 500)
         })
       }
     }

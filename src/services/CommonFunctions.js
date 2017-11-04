@@ -4,7 +4,7 @@ const filterTodayConst = {
   6: 's',
   7: 'd'
 }
-const filterDay = filterTodayConst[todayDate] ? filterTodayConst[todayDate] : 'lv'
+const filterDay = filterTodayConst[todayDate.getDay()] ? filterTodayConst[todayDate.getDay()] : 'lv'
 
 function calculateTimeDifference (timeString) {
   const time = timeString.split(':')
@@ -25,7 +25,7 @@ function getDayAbbreviation () {
 }
 
 function getTodayHourList (busItem) {
-  return busItem.statii[filterDay].linies ? busItem.statii[filterDay].linies : null
+  return busItem.statii[filterDay] ? busItem.statii[filterDay].linies : null
 }
 
 function calculateNextStationTime (hourList) {

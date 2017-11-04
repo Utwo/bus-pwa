@@ -65,10 +65,12 @@
       favoriteBusesWithStop () {
         if (this.favoriteBuses.length !== 0) {
           const todayAbbreviation = commonFunctions.getDayAbbreviation()
-          this.favoriteBuses.map(favorite => {
-            const todayHourList = commonFunctions.getTodayHourList(favorite)
-            const {in_stop_name, out_stop_name} = favorite.statii[todayAbbreviation]
-            Object.assign(favorite, commonFunctions.calculateNextStationTime(todayHourList), {in_stop_name, out_stop_name})
+          this.favoriteBuses.map(favoriteBusName => {
+            if (favoriteBusName.statii[todayAbbreviation]) {
+              const todayHourList = commonFunctions.getTodayHourList(favoriteBusName)
+              const {in_stop_name, out_stop_name} = favoriteBusName.statii[todayAbbreviation]
+              Object.assign(favoriteBusName, commonFunctions.calculateNextStationTime(todayHourList), {in_stop_name, out_stop_name})
+            }
           })
         }
         return this.favoriteBuses
