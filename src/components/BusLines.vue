@@ -5,7 +5,7 @@
     <v-container fluid>
       <v-layout row wrap>
         <v-flex xs6 sm3 md3>
-          <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan">autobuze</v-checkbox>
+          <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan"><v-icon></v-icon>autobuze</v-checkbox>
         </v-flex>
         <v-flex xs6 sm3 md3>
           <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">troleibuze</v-checkbox>

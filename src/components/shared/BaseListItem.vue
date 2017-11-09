@@ -2,7 +2,7 @@
   <div>
     <v-list-tile avatar>
       <v-list-tile-avatar>
-        <v-icon :class="typeStyleClass(transportationType)" class="white--text">directions_transit</v-icon>
+        <v-icon :class="transportationStyle" class="white--text">{{transportationIcon}}</v-icon>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <router-link :to="'bus/' + title">
@@ -40,14 +40,23 @@
         required: true
       }
     },
-    methods: {
-      typeStyleClass (transportationType) {
+    computed: {
+      transportationStyle () {
         return {
-          'deep-purple': transportationType === 'tramvaie',
-          'cyan': transportationType === 'autobuze',
-          'orange': transportationType === 'microbuze',
-          'pink': transportationType === 'troleibuze'
+          'deep-purple': this.transportationType === 'tramvaie',
+          'cyan': this.transportationType === 'autobuze',
+          'orange': this.transportationType === 'microbuze',
+          'pink': this.transportationType === 'troleibuze'
         }
+      },
+      transportationIcon () {
+        const icon = {
+          'tramvaie': 'tram',
+          'autobuze': 'directions_bus',
+          'microbuze': 'local_shipping',
+          'troleibuze': 'directions_transit'
+        }
+        return icon[this.transportationType]
       }
     }
   }
