@@ -1,26 +1,31 @@
 <template>
-  <v-container
-    fluid
-    grid-list-lg
-    v-touch="{right: () => this.$router.push('/')}"
-  >
-    <v-layout
-      row wrap
-      v-if="!isLoading"
+  <transition name="fade">
+    <v-container
+      fluid
+      grid-list-lg
+      v-touch="{right: () => this.$router.push('/')}"
     >
-      <v-flex xs12
-              v-for="bus in favoriteBuses"
-              v-if="favoriteBuses.length !== 0"
-              :key="bus.name" :to="'bus/' + bus.name">
-        <favorite-item :bus="bus" :now="now"></favorite-item>
-      </v-flex>
-      <v-flex xs12 v-if="favoriteBuses.length === 0" class="text-xs-center py-4">
-        <h4 class="grey--text text--lighten-1">No favorites</h4>
-        <p>For adding to favorites, press <v-icon color="pink">favorite</v-icon> icon on bus information page</p>
-      </v-flex>
-    </v-layout>
-    <BaseLoading v-if="isLoading" />
-  </v-container>
+      <v-layout
+        row wrap
+        v-if="!isLoading"
+      >
+        <v-flex xs12
+                v-for="bus in favoriteBuses"
+                v-if="favoriteBuses.length !== 0"
+                :key="bus.name" :to="'bus/' + bus.name">
+          <favorite-item :bus="bus" :now="now"></favorite-item>
+        </v-flex>
+        <v-flex xs12 v-if="favoriteBuses.length === 0" class="text-xs-center py-4">
+          <h4 class="grey--text text--lighten-1">No favorites</h4>
+          <p>For adding to favorites, press
+            <v-icon color="pink">favorite</v-icon>
+            icon on bus information page
+          </p>
+        </v-flex>
+      </v-layout>
+      <BaseLoading v-if="isLoading" />
+    </v-container>
+  </transition>
 </template>
 
 <script>

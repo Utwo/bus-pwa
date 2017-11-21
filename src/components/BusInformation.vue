@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <transition name="bus-info-transition">
     <div v-if="busItem && !isLoading">
       <v-toolbar card class="white" prominent>
         <v-toolbar-title
@@ -8,7 +8,7 @@
         </v-toolbar-title>
         <v-subheader class="grey--text">{{ busItem.type }} / {{ busItem.route }}</v-subheader>
         <v-spacer></v-spacer>
-        <v-btn fab small color="pink" :dark="!isFavorite" :outline="isFavorite" @click="addToFavorite">
+        <v-btn fab small class="favorite-btn" color="pink" :dark="!isFavorite" :outline="isFavorite" @click="addToFavorite">
           <v-icon>favorite</v-icon>
         </v-btn>
       </v-toolbar>
@@ -54,8 +54,8 @@
         </v-tabs-items>
       </v-tabs>
     </div>
-    <BaseLoading v-if="isLoading"/>
-  </div>
+    <BaseLoading v-if="isLoading" />
+  </transition>
 </template>
 
 <script>
@@ -119,3 +119,23 @@
     }
   }
 </script>
+
+<style scoped>
+  .bus-info-transition-enter-active .toolbar, .bus-info-transition-leave-active .toolbar {
+    transition: .3s all ease-out;
+  }
+
+  .bus-info-transition-enter .toolbar, .bus-info-transition-leave-to .toolbar {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+
+  .bus-info-transition-enter-active .favorite-btn, .bus-info-transition-leave-active .favorite-btn {
+    transition: .6s all ease-out 1.2s;
+  }
+
+  .bus-info-transition-enter .favorite-btn, .bus-info-transition-leave-to .favorite-btn {
+    transform: translateX(80px) rotate(180deg);
+    opacity: 0;
+  }
+</style>

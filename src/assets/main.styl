@@ -20,6 +20,15 @@
 }
 
 a {
-  color: $theme.primary
+  color: $primary
   text-decoration: none
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: .4s all ease-out;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(50px) scale(.9);
 }

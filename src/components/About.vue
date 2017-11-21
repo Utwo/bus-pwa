@@ -1,21 +1,44 @@
 <template>
-  <v-container fluid v-once>
-    <h4 class="grey--text text--lighten-1">About</h4>
-    <p>A simple bus schedule pwa app made in Vue.</p>
-    <p>This app lets you to:</p>
-    <ul>
-      <li>find schedule and route information about buses in Cluj-Napoca</li>
-      <li>add bus lines to favorites</li>
-      <li>use the app offline</li>
-    </ul>
-    <br>
-    <p>This project make use of <a href="https://github.com/Utwo/ctpcj-scrapper">CTP CJ Scrapper</a>,
-      a great node utility that scrap <a href="http://ctpcj.ro">ctp website</a> and
-      save bus lines and route information to json file.</p>
-    <p>Bus Cluj is an open source project hosted on <a href="https://github.com/Utwo/bus-pwa">github</a>, feedback and contributions are always welcome and appreciated.</p>
-    <v-divider class="my-4"></v-divider>
-    <div class="text-xs-center">
-      <img src="../assets/bus.svg" alt="bus icon"/>
-    </div>
-  </v-container>
+  <transition name="about-transition">
+    <v-container fluid v-once>
+      <h4 class="grey--text text--lighten-1">About</h4>
+      <p>A simple bus schedule pwa app made in Vue.</p>
+      <p>This app lets you to:</p>
+      <ul>
+        <li>find schedule and route information about buses in Cluj-Napoca</li>
+        <li>add bus lines to favorites</li>
+        <li>use the app offline</li>
+      </ul>
+      <br>
+      <p>This project make use of <a href="https://github.com/Utwo/ctpcj-scrapper">CTP CJ Scrapper</a>,
+        a great node utility that scrap <a href="http://ctpcj.ro">ctp website</a> and
+        save bus lines and route information to json file.</p>
+      <p>Bus Cluj is an open source project hosted on <a href="https://github.com/Utwo/bus-pwa">github</a>, feedback and contributions are always welcome and appreciated.
+      </p>
+      <v-divider class="my-4"></v-divider>
+      <div class="text-xs-center">
+        <img class="bus-icon" src="../assets/bus.svg" alt="bus icon" />
+      </div>
+    </v-container>
+  </transition>
 </template>
+
+<style scoped>
+  .about-transition-enter-active, .about-transition-leave-active {
+    transition: .4s all ease-out;
+  }
+
+  .about-transition-enter, .about-transition-leave-to {
+    opacity: 0;
+    transform: translateY(50px) scale(.9);
+  }
+
+  .bus-icon {
+    transition: .6s all ease-out .4s;
+  }
+
+  .about-transition-enter .bus-icon {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+</style>

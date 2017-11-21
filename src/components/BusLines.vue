@@ -1,30 +1,30 @@
 <template>
-  <div
-    v-touch="{left: () => this.$router.push('/favorite')}"
-  >
-    <v-container fluid>
-      <v-layout row wrap>
-        <v-flex xs6 sm3 md3>
-          <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan"><v-icon></v-icon>autobuze</v-checkbox>
-        </v-flex>
-        <v-flex xs6 sm3 md3>
-          <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">troleibuze</v-checkbox>
-        </v-flex>
-        <v-flex xs6 sm3 md3>
-          <v-checkbox label="tramvaie" name="tramvaie" v-model="selectedType" value="tramvaie" color="deep-purple">tramvaie</v-checkbox>
-        </v-flex>
-        <v-flex xs6 sm3 md3>
-          <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">microbuze</v-checkbox>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <div>
+  <transition name="fade">
+    <div
+      v-touch="{left: () => this.$router.push('/favorite')}"
+    >
+      <v-container fluid>
+        <v-layout row wrap>
+          <v-flex xs6 sm3 md3>
+            <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan"><v-icon></v-icon>autobuze</v-checkbox>
+          </v-flex>
+          <v-flex xs6 sm3 md3>
+            <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">troleibuze</v-checkbox>
+          </v-flex>
+          <v-flex xs6 sm3 md3>
+            <v-checkbox label="tramvaie" name="tramvaie" v-model="selectedType" value="tramvaie" color="deep-purple">tramvaie</v-checkbox>
+          </v-flex>
+          <v-flex xs6 sm3 md3>
+            <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">microbuze</v-checkbox>
+          </v-flex>
+        </v-layout>
+      </v-container>
       <BaseList :list="filteredBuses" v-if="!isLoading">
-        <BaseListItem slot-scope="bus" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
+        <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
       </BaseList>
       <BaseLoading v-if="isLoading" />
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

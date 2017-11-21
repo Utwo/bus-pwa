@@ -23,7 +23,6 @@ import App from './App.vue'
 import router from './router'
 import './assets/main.styl'
 
-Vue.config.productionTip = false
 Vue.use(Vuetify,
   {
     components: {

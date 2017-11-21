@@ -1,4 +1,4 @@
-const loadedData = { line: [] }
+const loadedData = {line: []}
 
 async function getBusesDetail () {
   if (loadedData.busesDetail) {
