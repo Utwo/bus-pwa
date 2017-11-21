@@ -26,9 +26,25 @@ a {
 
 .fade-enter-active, .fade-leave-active {
   transition: .4s all ease-out;
+  transform-origin: 50% 100%;
 }
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
-  transform: translateY(50px) scale(.9);
+  transform: scale(.8) translateY(40px);
+}
+
+.progress-linear__bar__determinate.primary {
+	animation: bg-pan-right 6s linear infinite alternate both;
+	background-image: linear-gradient(270deg,#cc6aa5,#3e91cc,#2dcca7);
+  background-size: 600% 100%;
+}
+
+@keyframes bg-pan-right {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

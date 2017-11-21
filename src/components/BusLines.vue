@@ -1,5 +1,4 @@
 <template>
-  <transition name="fade">
     <div
       v-touch="{left: () => this.$router.push('/favorite')}"
     >
@@ -19,12 +18,15 @@
           </v-flex>
         </v-layout>
       </v-container>
-      <BaseList :list="filteredBuses" v-if="!isLoading">
-        <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
-      </BaseList>
-      <BaseLoading v-if="isLoading" />
+      <transition name="fade">
+        <BaseList :list="filteredBuses" v-if="!isLoading">
+          <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
+        </BaseList>
+      </transition>
+      <transition name="fade">
+        <BaseLoading v-if="isLoading" />
+      </transition>
     </div>
-  </transition>
 </template>
 
 <script>

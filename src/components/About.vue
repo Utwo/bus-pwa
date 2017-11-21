@@ -1,5 +1,5 @@
 <template>
-  <transition name="about-transition">
+  <transition name="fade">
     <v-container fluid v-once>
       <h4 class="grey--text text--lighten-1">About</h4>
       <p>A simple bus schedule pwa app made in Vue.</p>
@@ -24,21 +24,16 @@
 </template>
 
 <style scoped>
-  .about-transition-enter-active, .about-transition-leave-active {
-    transition: .4s all ease-out;
-  }
-
-  .about-transition-enter, .about-transition-leave-to {
-    opacity: 0;
-    transform: translateY(50px) scale(.9);
-  }
-
   .bus-icon {
-    transition: .6s all ease-out .4s;
+    transition: .8s all ease-out .6s;
   }
 
-  .about-transition-enter .bus-icon {
+  .fade-enter .bus-icon {
     opacity: 0;
     transform: translateX(-100%);
+  }
+
+  .fade-leave-active {
+    transition-duration: 0s;
   }
 </style>

@@ -1,10 +1,10 @@
 <template>
-  <transition name="fade">
-    <v-container
-      fluid
-      grid-list-lg
-      v-touch="{right: () => this.$router.push('/')}"
-    >
+  <v-container
+    fluid
+    grid-list-lg
+    v-touch="{right: () => this.$router.push('/')}"
+  >
+    <transition name="fade">
       <v-layout
         row wrap
         v-if="!isLoading"
@@ -23,9 +23,11 @@
           </p>
         </v-flex>
       </v-layout>
-      <BaseLoading v-if="isLoading" />
-    </v-container>
-  </transition>
+    </transition>
+    <transition name="fade">
+      <BaseLoading v-if="isLoading"/>
+    </transition>
+  </v-container>
 </template>
 
 <script>
