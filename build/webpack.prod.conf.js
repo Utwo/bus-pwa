@@ -1,20 +1,26 @@
-var fs = require('fs')
-var path = require('path')
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-var loadMinified = require('./load-minified')
+'use strict'
 
-var env = config.build.env
+const fs = require('fs')
+const path = require('path')
+const utils = require('./utils')
+const webpack = require('webpack')
+const config = require('../config')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const loadMinified = require('./load-minified')
+const PrerendererWebpackPlugin = require('prerender-spa-plugin')
+const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer // or JSDOMRenderer, or ChromeRenderer
+const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
+const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
+const prodEnv = require('../config/prod.env')
+const env = config.build.env
 
-var webpackConfig = merge(baseWebpackConfig, {
+const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -98,17 +104,35 @@ var webpackConfig = merge(baseWebpackConfig, {
     ]),
     // service worker caching
     new SWPrecacheWebpackPlugin({
-      cacheId: 'my-vue-app',
+      cacheId: 'bus-pwa',
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
-      stripPrefix: 'dist/'
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          // Todo: replace with prodEnv.API_URL
+          urlPattern: /^https:\/\/ctpcj-snewwkrodh\.now\.sh/,
+          handler: 'fastest'
+        }]
+    }),
+    // prerender
+    new PrerendererWebpackPlugin({
+      // Required - The path to the webpack-outputted app to prerender.
+      staticDir: path.join(__dirname, '../dist'),
+      // Required - Routes to render.
+      routes: ['/about', '/favorite'],
+
+      // Optional - This is the default.
+      // or new ChromeRenderer({ command: 'chrome-start-command' })
+      // or new JSDOMRenderer()
+      renderer: new BrowserRenderer()
     })
   ]
 })
 
 if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -126,7 +150,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
