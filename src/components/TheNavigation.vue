@@ -60,7 +60,7 @@
     methods: {
       async focusSelect () {
         if (this.busLines.length === 0) {
-          this.busLines = await LineService.getBusesBasic()
+          this.busLines = await LineService.getBuses()
         }
       },
       redirectTo (busItem) {

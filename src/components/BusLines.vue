@@ -64,7 +64,7 @@
     },
     methods: {
       async fetchData () {
-        this.buses = await LineService.getBusesBasic()
+        this.buses = await LineService.getBuses()
         this.isLoading = false
       }
     }

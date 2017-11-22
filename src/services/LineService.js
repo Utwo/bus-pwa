@@ -1,33 +1,25 @@
-const loadedData = {line: []}
+let loadedData = []
+let isLoadedAllData = false
 
-async function getBusesDetail () {
-  if (loadedData.busesDetail) {
-    return loadedData.busesDetail
+async function getBuses () {
+  if (isLoadedAllData) {
+    return loadedData
   }
   const response = await fetch(`${process.env.API_URL}/buses_detail.json`)
-  loadedData.busesDetail = transformBusesResponse(await response.json())
-  return response.body
-}
-
-async function getBusesBasic () {
-  if (loadedData.busesBasic) {
-    return loadedData.busesBasic
-  }
-  const response = await fetch(`${process.env.API_URL}/buses_basic.json`)
-  loadedData.busesBasic = transformBusesResponse(await response.json())
-  return loadedData.busesBasic
+  loadedData = transformBusesResponse(await response.json())
+  isLoadedAllData = true
+  return loadedData
 }
 
 async function getLine (lineName) {
-  if (loadedData.line[lineName]) {
-    return loadedData.line[lineName]
+  if (!isLoadedAllData) {
+    await getBuses()
   }
-  const response = await fetch(`${process.env.API_URL}/${lineName}.json`)
-  if (response.status !== 200) {
-    return
+  for (const line of loadedData) {
+    if (line.name === lineName) {
+      return line
+    }
   }
-  loadedData.line[lineName] = await response.json()
-  return loadedData.line[lineName]
 }
 
 function addToFavorite (lineNumber) {
@@ -40,9 +32,12 @@ function addToFavorite (lineNumber) {
   localStorage.setItem('myFavorites', JSON.stringify(myFavorites))
 }
 
-function getFavorites () {
+async function getFavorites () {
   const favorites = []
   const favoriteNameList = localStorage.getItem('myFavorites') ? JSON.parse(localStorage.getItem('myFavorites')) : []
+  if (!isLoadedAllData) {
+    await getBuses()
+  }
   favoriteNameList.map(favoriteName => {
     favorites.push(getLine(favoriteName))
   })
@@ -68,5 +63,5 @@ function transformBusesResponse (buses) {
   return newResponse
 }
 
-export default {getBusesDetail, getBusesBasic, getLine, addToFavorite, getFavorites, isFavorite}
+export default {getBuses, getLine, addToFavorite, getFavorites, isFavorite}
 
