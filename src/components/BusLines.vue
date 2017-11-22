@@ -23,9 +23,7 @@
           <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
         </BaseList>
       </transition>
-      <transition name="fade">
-        <BaseLoading v-if="isLoading" />
-      </transition>
+      <BaseLoading v-if="isLoading" />
     </div>
 </template>
 

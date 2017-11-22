@@ -24,9 +24,7 @@
         </v-flex>
       </v-layout>
     </transition>
-    <transition name="fade">
-      <BaseLoading v-if="isLoading"/>
-    </transition>
+    <BaseLoading v-if="isLoading"/>
   </v-container>
 </template>
 
