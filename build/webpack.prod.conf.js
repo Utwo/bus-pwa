@@ -13,8 +13,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
-const PrerenderSpaPlugin = require('prerender-spa-plugin')
-
+const PrerendererWebpackPlugin = require('prerender-spa-plugin')
+const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer // or JSDOMRenderer, or ChromeRenderer
+const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
+const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
+const prodEnv = require('../config/prod.env')
 const env = config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -105,15 +108,26 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
-      stripPrefix: 'dist/'
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          // Todo: replace with prodEnv.API_URL
+          urlPattern: /^https:\/\/ctpcj-snewwkrodh\.now\.sh/,
+          handler: 'fastest'
+        }]
     }),
     // prerender
-    new PrerenderSpaPlugin(
-      // Absolute path to compiled SPA
-      path.join(__dirname, '../dist/'),
-      // List of routes to prerender
-      [ '/', '/about' ]
-    )
+    new PrerendererWebpackPlugin({
+      // Required - The path to the webpack-outputted app to prerender.
+      staticDir: path.join(__dirname, '../dist'),
+      // Required - Routes to render.
+      routes: ['/about', '/favorite'],
+
+      // Optional - This is the default.
+      // or new ChromeRenderer({ command: 'chrome-start-command' })
+      // or new JSDOMRenderer()
+      renderer: new BrowserRenderer()
+    })
   ]
 })
 
