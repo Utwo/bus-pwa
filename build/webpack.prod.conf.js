@@ -112,7 +112,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       runtimeCaching: [
         {
           // Todo: replace with prodEnv.API_URL
-          urlPattern: /^https:\/\/ctpcj-snewwkrodh\.now\.sh/,
+          urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
           handler: 'fastest'
         }]
     }),

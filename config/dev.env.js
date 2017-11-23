@@ -3,5 +3,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_URL: '"https://ctpcj-snewwkrodh.now.sh"'
+  API_URL: '"https://ctpcj-scraper.now.sh"'
 })
