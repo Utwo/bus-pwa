@@ -112,7 +112,9 @@
         this.$nextTick(function () {
           setTimeout(() => {
             const scrollHereElement = document.getElementById(this.current_key).getElementsByClassName('scroll-here')[0]
-            scrollHereElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'start'})
+            if (scrollHereElement) {
+              scrollHereElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'start'})
+            }
           }, 500)
         })
       }
@@ -121,6 +123,10 @@
 </script>
 
 <style scoped>
+  .toolbar__title {
+    overflow: visible;
+  }
+
   .bus-info-transition-enter-active .toolbar, .bus-info-transition-leave-active .toolbar {
     transition: .3s all ease-out;
   }

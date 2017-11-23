@@ -5,9 +5,11 @@
       <v-toolbar-title>Cluj BUS</v-toolbar-title>
       <v-select
         solo
+        ref="search"
         prepend-icon="search"
         placeholder="Search"
         autocomplete
+        :class="{'search-expand': focus}"
         class="mx-5 green lighten-1 elevation-0 white--text"
         style="max-width: 800px"
         dark
@@ -54,20 +56,35 @@
     data () {
       return {
         showNavigation: true,
-        busLines: []
+        busLines: [],
+        focus: false
       }
     },
     methods: {
       async focusSelect () {
+        this.focus = true
         if (this.busLines.length === 0) {
           this.busLines = await LineService.getBuses()
         }
       },
       redirectTo (busItem) {
         if (busItem.name) {
+          this.focus = false
           this.$router.push('/bus/' + busItem.name)
         }
       }
     }
   }
 </script>
+
+<style scoped>
+  @media only screen and (max-width: 768px) {
+    .search-expand {
+      position: absolute;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      margin: 0 !important;
+    }
+  }
+</style>
