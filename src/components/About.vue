@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <v-container fluid v-once>
-      <h4 class="grey--text text--lighten-1">About</h4>
+      <h2 class="grey--text text--lighten-1">About</h2>
       <p>A simple bus schedule pwa app made in Vue.</p>
       <p>This app lets you to:</p>
       <ul>

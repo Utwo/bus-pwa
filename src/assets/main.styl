@@ -2,11 +2,23 @@
 @import '../../node_modules/vuetify/src/stylus/app';
 @import './_loading';
 
+li {
+  list-style-position: inside
+}
+
 .navigation div.toolbar__content {
   margin-bottom: 10px;
 }
 
 .hide-navigation .toolbar__extension {
+  display: none
+}
+
+.search__wrap {
+  flex: 1
+}
+
+.search-icon--mobile {
   display: none
 }
 
@@ -50,17 +62,30 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
-  .navigation .toolbar__content .spacer {
+  .navigation div.toolbar__content {
+    margin-bottom: 16px;
+  }
+
+  .search-expand {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    margin-top: 3px;
+    width: 100%;
+    transition: .4s all;
+  }
+
+  .search-expand .input-group--solo {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+
+  .hide-search--mobile {
     display: none
   }
-}
 
-@media only screen and (max-width: 320px) {
-  .navigation .toolbar__title {
-    margin-left: 0;
-  }
-  .navigation .input-group--solo {
-    margin-left: 10px !important;
-    margin-right: 0px !important;
+  .search-icon--mobile {
+    display: block;
   }
 }

@@ -1,27 +1,31 @@
 <template>
   <v-tabs light fixed icons grow :scrollable="false" class="navigation" :class="{'hide-navigation': !showNavigation}">
-    <v-toolbar class="green lighten-2 white--text">
+    <v-toolbar dark  class="green lighten-2 white--text">
       <v-toolbar-side-icon @click="showNavigation = !showNavigation"></v-toolbar-side-icon>
       <v-toolbar-title>Cluj BUS</v-toolbar-title>
+      <div @click="clickSelect" class="search__wrap" :class="{'hide-search--mobile': !hideIconSearch, 'search-expand': hideIconSearch}">
       <v-select
         solo
         ref="search"
         prepend-icon="search"
         placeholder="Search"
-        autocomplete
-        :class="{'search-expand': focus}"
+        :class="{'hide-search--mobile': !hideIconSearch, 'search-expand': hideIconSearch}"
         class="mx-5 green lighten-1 elevation-0 white--text"
-        style="max-width: 800px"
         dark
         cache-items
         :items="busLines"
         @change="redirectTo"
-        @focus="focusSelect"
         item-text="name"
         return-object
         tabindex="1"
+        single-line
+        autocomplete
       ></v-select>
+      </div>
       <v-spacer></v-spacer>
+      <v-btn icon class="search-icon--mobile" @click="hideIconSearch = !hideIconSearch" :class="{'hide-search': hideIconSearch}">
+        <v-icon>search</v-icon>
+      </v-btn>
       <v-menu offset-y :nudge-width="100">
         <v-btn icon slot="activator">
           <v-icon>more_vert</v-icon>
@@ -56,35 +60,22 @@
     data () {
       return {
         showNavigation: true,
-        busLines: [],
-        focus: false
+        hideIconSearch: false,
+        busLines: []
       }
     },
     methods: {
-      async focusSelect () {
-        this.focus = true
+      async clickSelect () {
         if (this.busLines.length === 0) {
           this.busLines = await LineService.getBuses()
         }
       },
       redirectTo (busItem) {
+        this.hideIconSearch = false
         if (busItem.name) {
-          this.focus = false
           this.$router.push('/bus/' + busItem.name)
         }
       }
     }
   }
 </script>
-
-<style scoped>
-  @media only screen and (max-width: 768px) {
-    .search-expand {
-      position: absolute;
-      z-index: 999;
-      top: 0;
-      left: 0;
-      margin: 0 !important;
-    }
-  }
-</style>

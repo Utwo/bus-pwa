@@ -115,7 +115,7 @@
             if (scrollHereElement) {
               scrollHereElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'start'})
             }
-          }, 500)
+          }, 1000)
         })
       }
     }
