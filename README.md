@@ -1,4 +1,5 @@
 # Cluj Bus
+#### [Live demo](https://buscluj.netlify.com/)
 
 A simple bus schedule pwa app made in Vue.
 This app lets you to:
