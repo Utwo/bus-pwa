@@ -15,9 +15,8 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
 const PrerendererWebpackPlugin = require('prerender-spa-plugin')
 const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer // or JSDOMRenderer, or ChromeRenderer
-const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
-const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
-const prodEnv = require('../config/prod.env')
+// const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
+// const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
 const env = config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {

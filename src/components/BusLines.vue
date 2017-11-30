@@ -1,64 +1,55 @@
 <template>
-    <div
-      v-touch="{left: () => this.$router.push('/favorite')}"
-    >
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex xs6 sm3 md3>
-            <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan"><v-icon></v-icon>autobuze</v-checkbox>
-          </v-flex>
-          <v-flex xs6 sm3 md3>
-            <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">troleibuze</v-checkbox>
-          </v-flex>
-          <v-flex xs6 sm3 md3>
-            <v-checkbox label="tramvaie" name="tramvaie" v-model="selectedType" value="tramvaie" color="deep-purple">tramvaie</v-checkbox>
-          </v-flex>
-          <v-flex xs6 sm3 md3>
-            <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">microbuze</v-checkbox>
-          </v-flex>
-        </v-layout>
-      </v-container>
-      <transition name="fade">
-        <BaseList :list="filteredBuses" v-if="!isLoading">
-          <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route" :transportationType="bus.type" :zone="bus.lineType"></BaseListItem>
-        </BaseList>
-      </transition>
-      <BaseLoading v-if="isLoading" />
-    </div>
+  <div
+    v-touch="{left: () => this.$router.push('/favorite')}"
+  >
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="autobuze" name="autobuze" v-model="selectedType" value="autobuze" color="cyan">
+            <v-icon></v-icon>
+            autobuze
+          </v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="troleibuze" name="troleibuze" v-model="selectedType" value="troleibuze" color="pink">
+            troleibuze
+          </v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="tramvaie" name="tramvaie" v-model="selectedType" value="tramvaie" color="deep-purple">
+            tramvaie
+          </v-checkbox>
+        </v-flex>
+        <v-flex xs6 sm3 md3>
+          <v-checkbox label="microbuze" name="microbuze" v-model="selectedType" value="microbuze" color="orange">
+            microbuze
+          </v-checkbox>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <LinesList :selectedType="selectedType" :buses="buses" v-if="!isLoading"></LinesList>
+    <BaseLoading v-if="isLoading"/>
+  </div>
 </template>
 
 <script>
+  import LinesList from './LinesList'
   import LineService from '../services/LineService'
-  import BaseList from './shared/BaseList'
-  import BaseListItem from './shared/BaseListItem'
   import BaseLoading from './shared/BaseLoading'
 
   export default {
     data () {
       return {
-        buses: [],
         selectedType: [],
-        isLoading: true
+        isLoading: true,
+        buses: []
       }
     },
     components: {
-      BaseList, BaseListItem, BaseLoading
+      LinesList, BaseLoading
     },
     created () {
       this.fetchData()
-    },
-    computed: {
-      filteredBuses () {
-        let filtered = this.buses
-        if (this.selectedType.length > 0) {
-          filtered = filtered.filter(item => {
-            if (this.selectedType.indexOf(item.type) > -1) {
-              return true
-            }
-          })
-        }
-        return filtered
-      }
     },
     methods: {
       async fetchData () {
