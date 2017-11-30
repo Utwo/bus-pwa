@@ -13,10 +13,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
-const PrerendererWebpackPlugin = require('prerender-spa-plugin')
-const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer // or JSDOMRenderer, or ChromeRenderer
-// const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
-// const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
 const env = config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -114,21 +110,30 @@ const webpackConfig = merge(baseWebpackConfig, {
           urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
           handler: 'fastest'
         }]
-    }),
-    // prerender
+    })
+  ]
+})
+
+if (config.build.enablePrerender) {
+  const PrerendererWebpackPlugin = require('prerender-spa-plugin')
+  const BrowserRenderer = PrerendererWebpackPlugin.BrowserRenderer // or JSDOMRenderer, or ChromeRenderer
+  // const ChromeRenderer = PrerendererWebpackPlugin.ChromeRenderer
+  // const JSDOMRenderer = PrerendererWebpackPlugin.JSDOMRenderer
+
+  webpackConfig.plugins.push(
     new PrerendererWebpackPlugin({
       // Required - The path to the webpack-outputted app to prerender.
       staticDir: path.join(__dirname, '../dist'),
       // Required - Routes to render.
-      routes: ['/about', '/favorite'],
+      routes: ['/about', '/'],
 
       // Optional - This is the default.
       // or new ChromeRenderer({ command: 'chrome-start-command' })
       // or new JSDOMRenderer()
       renderer: new BrowserRenderer()
     })
-  ]
-})
+  )
+}
 
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
