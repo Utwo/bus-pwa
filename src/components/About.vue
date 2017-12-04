@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <transition name="fade">
     <v-container fluid v-once>
       <h2 class="grey--text text--lighten-1">About</h2>

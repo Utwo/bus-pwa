@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <v-container class="text-xs-center" v-once>
     <div class="ferry">
       <div class="chimney"></div>

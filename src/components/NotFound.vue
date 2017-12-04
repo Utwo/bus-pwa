@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <v-container fluid v-once>
     <h2 class="grey--text text--lighten-1 text-xs-center py-3">404<br>No route found</h2>
     <v-divider class="my-4"></v-divider>
