@@ -36,6 +36,11 @@
               <router-link :to="'/about'">About</router-link>
             </v-list-tile-title>
           </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-title>
+              <span itemprop="telephone"><a href="sms:7479">Buy ticket</a></span>
+            </v-list-tile-title>
+          </v-list-tile>
         </v-list>
       </v-menu>
       <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-show="showNavigation">
