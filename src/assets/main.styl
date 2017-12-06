@@ -23,9 +23,24 @@ li {
   display: none
 }
 
-.bus-table {
-  height: 65vh;
+.bus-table tbody {
+  display: block;
+  max-height: 50vh;
   overflow-y: scroll;
+}
+
+.bus-table thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.bus-table thead th{
+  width: 100%;
+}
+
+.scroll-here {
+  border-top: 1px solid @success;
 }
 
 .tabs__bar .tabs__wrapper {

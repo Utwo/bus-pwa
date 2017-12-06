@@ -5,7 +5,7 @@
     :items="hourList"
     class="elevation-0 text-xs-center bus-table"
   >
-    <tr slot="headers" slot-scope="props">
+    <tr slot="headers" slot-scope="props" class="grey lighten-4">
       <th>{{ inStopName }}</th>
       <th>{{ outStopName }}</th>
     </tr>
