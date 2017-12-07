@@ -30,6 +30,13 @@ save bus lines and route information to json file
 
 Clone that open source project to generate real data.
 
+## Todo
+- [ ] SSR
+- [ ] Prerender
+- [ ] Change $color-pack to false
+- [ ] Choose better colors
+- [ ] Put typescript (only when available in cli typescript template)
+
 ## Credits
 Loading animation from:
 https://codepen.io/andersschmidt/pen/NPVPYP
