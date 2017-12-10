@@ -7,7 +7,7 @@ const todayDate = new Date()
 const filterTodayConst = {
   1: 'lv',
   6: 's',
-  7: 'd'
+  0: 'd'
 }
 const filterDay = filterTodayConst[todayDate.getDay()] ? filterTodayConst[todayDate.getDay()] : 'lv'
 
