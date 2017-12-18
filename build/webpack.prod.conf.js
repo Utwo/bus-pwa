@@ -108,7 +108,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         {
           // Todo: replace with prodEnv.API_URL
           urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
-          handler: 'fastest'
+          handler: 'cacheFirst',
+          options: {
+            cache: {
+              maxEntries: 15,
+              maxAgeSeconds: 864000
+            }
+          }
         }]
     })
   ]

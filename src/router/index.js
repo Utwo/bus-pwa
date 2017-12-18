@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import BusLines from '../components/BusLines.vue'
-import BusInformation from '../components/BusInformation.vue'
 import Favorite from '../components/Favorite.vue'
 
 const About = () => import('../components/About.vue')
 const NotFound = () => import('../components/NotFound.vue')
+const BusInformation = () => import('../components/BusInformation.vue')
 
 Vue.use(Router)
 

@@ -11,16 +11,20 @@
         <v-flex xs6>
           <div v-if="busWithStop.next_in_stop">
             <h4>{{ busWithStop.in_stop_name }}</h4>
-            {{ busWithStop.next_in_stop.formatTime }} <span class="grey--text text--lighten-1">#</span>
-            <v-chip class="cyan lighten-4">{{ busWithStop.next_in_stop.remainingTime }}</v-chip>
+            {{ busWithStop.next_in_stop.currentDateTime }} <span class="grey--text text--lighten-1"> # </span>
+            <v-chip class="cyan lighten-4">
+              {{ busWithStop.next_in_stop.formatTime }} - {{ busWithStop.next_in_stop.remainingTime }}
+            </v-chip>
             <v-progress-linear v-model="busWithStop.next_in_stop.progress"></v-progress-linear>
           </div>
         </v-flex>
         <v-flex xs6>
           <div v-if="busWithStop.next_out_stop">
             <h4>{{ busWithStop.out_stop_name }}</h4>
-            {{ busWithStop.next_out_stop.formatTime }} <span class="grey--text text--lighten-1">#</span>
-            <v-chip color="red lighten-4">{{ busWithStop.next_out_stop.remainingTime }}</v-chip>
+            {{ busWithStop.next_out_stop.currentDateTime }} <span class="grey--text text--lighten-1"> # </span>
+            <v-chip color="red lighten-4">
+              {{ busWithStop.next_out_stop.formatTime }} - {{ busWithStop.next_out_stop.remainingTime }}
+            </v-chip>
             <v-progress-linear v-model="busWithStop.next_out_stop.progress"></v-progress-linear>
           </div>
         </v-flex>

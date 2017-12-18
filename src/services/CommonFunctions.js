@@ -30,8 +30,8 @@ function calculateNextStationTime (hourList) {
   if (hourList.length === 0) {
     return
   }
-  let current1
-  let current2
+  let current1 = timeStringToDate(hourList[0][0])
+  let current2 = timeStringToDate(hourList[0][1])
   let nextHour1
   let nextHour2
   for (const hours of hourList) {
@@ -54,14 +54,14 @@ function calculateNextStationTime (hourList) {
   const progress2 = calculateProgress(current2, nextHour2)
   return {
     next_in_stop: {
-      currentDateTime: current1,
+      currentDateTime: format(current1, 'HH:mm'),
       nextDateTime: nextHour1,
       formatTime: format(nextHour1, 'HH:mm'),
       progress: progress1,
       remainingTime: distanceInWordsToNow(nextHour1)
     },
     next_out_stop: {
-      currentDateTime: current2,
+      currentDateTime: format(current2, 'HH:mm'),
       nextDateTime: nextHour2,
       formatTime: format(nextHour2, 'HH:mm'),
       progress: progress2,
