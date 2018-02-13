@@ -95,6 +95,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../static/_redirects'),
+        to: config.build.assetsRoot,
+        ignore: ['.*']
       }
     ]),
     // service worker caching
