@@ -2,6 +2,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import format from 'date-fns/format'
 import isFuture from 'date-fns/is_future'
 import differenceInSeconds from 'date-fns/difference_in_seconds'
+export default {calculateNextStationTime, getDayAbbreviation, getTodayHourList, calculateProgress}
 
 const todayDate = new Date()
 const filterTodayConst = {
@@ -35,20 +36,30 @@ function calculateNextStationTime (hourList) {
   let nextHour1
   let nextHour2
   for (const hours of hourList) {
-    nextHour1 = timeStringToDate(hours[0])
-    if (!isFuture(nextHour1)) {
-      current1 = new Date(nextHour1.valueOf())
-    } else {
-      break
+    if (hours[0]) {
+      nextHour1 = timeStringToDate(hours[0])
+      if (!isFuture(nextHour1)) {
+        current1 = new Date(nextHour1.valueOf())
+      } else {
+        break
+      }
     }
   }
   for (const hours of hourList) {
-    nextHour2 = timeStringToDate(hours[1])
-    if (!isFuture(nextHour2)) {
-      current2 = new Date(nextHour2.valueOf())
-    } else {
-      break
+    if (hours[1]) {
+      nextHour2 = timeStringToDate(hours[1])
+      if (!isFuture(nextHour2)) {
+        current2 = new Date(nextHour2.valueOf())
+      } else {
+        break
+      }
     }
+  }
+  if (!isFuture(nextHour1)) {
+    nextHour1 = timeStringToDate(hourList[0][0])
+  }
+  if (!isFuture(nextHour2)) {
+    nextHour2 = timeStringToDate(hourList[0][1])
   }
   const progress1 = calculateProgress(current1, nextHour1)
   const progress2 = calculateProgress(current2, nextHour2)
@@ -75,6 +86,3 @@ function calculateProgress (currentDateTime, nextDateTime) {
   const currentDateTodayDate = differenceInSeconds(new Date(), currentDateTime)
   return Math.abs((currentDateTodayDate * 100) / currentDateNextDate)
 }
-
-export default {calculateNextStationTime, getDayAbbreviation, getTodayHourList, calculateProgress}
-
