@@ -22,6 +22,7 @@ import Touch from 'vuetify/es5/directives/touch'
 import App from './App.vue'
 import router from './router'
 import './assets/main.styl'
+import './registerServiceWorker'
 
 Vue.use(Vuetify,
   {
@@ -50,9 +51,9 @@ Vue.use(Vuetify,
     }
   })
 
-/* eslint no-new:0 */
+Vue.config.productionTip = false
+
 new Vue({
-  el: '#app',
   router,
   render: h => h(App)
-})
+}).$mount('#app')

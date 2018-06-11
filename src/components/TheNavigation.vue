@@ -1,6 +1,5 @@
 <template>
-  <v-tabs light fixed icons grow :scrollable="false" class="navigation" :class="{'hide-navigation': !showNavigation}">
-    <v-toolbar dark  class="green lighten-2 white--text">
+    <v-toolbar dark tabs class="navigation green lighten-2" :class="{'hide-navigation': !showNavigation}">
       <v-toolbar-side-icon @click="showNavigation = !showNavigation"></v-toolbar-side-icon>
       <v-toolbar-title>Cluj BUS</v-toolbar-title>
       <div @click="clickSelect" class="search__wrap" :class="{'hide-search--mobile': !hideIconSearch, 'search-expand': hideIconSearch}">
@@ -11,7 +10,6 @@
         placeholder="Search"
         :class="{'hide-search--mobile': !hideIconSearch, 'search-expand': hideIconSearch}"
         class="mx-5 green lighten-1 elevation-0 white--text"
-        dark
         cache-items
         :items="busLines"
         @change="redirectTo"
@@ -43,19 +41,18 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-tabs-bar class="grey lighten-4 ma-0" slot="extension" v-show="showNavigation">
+      <v-tabs icons-and-text dark centered grow slot="extension" color="grey lighten-4">
         <v-tabs-slider class="cyan"></v-tabs-slider>
-        <v-tabs-item to="/" router>
-          <v-icon class="green--text">directions_bus</v-icon>
+        <v-tab to="/" router>
           <span class="green--text">Lines</span>
-        </v-tabs-item>
-        <v-tabs-item to="/favorite" router>
-          <v-icon class="green--text">favorite</v-icon>
+          <v-icon class="green--text">directions_bus</v-icon>
+        </v-tab>
+        <v-tab to="/favorite" router>
           <span class="green--text">Favorites</span>
-        </v-tabs-item>
-      </v-tabs-bar>
+          <v-icon class="green--text">favorite</v-icon>
+        </v-tab>
+      </v-tabs>
     </v-toolbar>
-  </v-tabs>
 </template>
 
 <script>

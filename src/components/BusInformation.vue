@@ -13,15 +13,13 @@
         </v-btn>
       </v-toolbar>
       <v-divider class="grey lighten-3"></v-divider>
-      <v-tabs grow v-model="current_key" @input="scrollTo">
-        <v-tabs-bar class="white">
-          <v-tabs-slider class="yellow"></v-tabs-slider>
-          <v-tabs-item v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tabs-item>
-          <v-tabs-item v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tabs-item>
-          <v-tabs-item v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tabs-item>
-        </v-tabs-bar>
+      <v-tabs grow v-model="current_key" class="white" @input="scrollTo">
+        <v-tabs-slider class="yellow"></v-tabs-slider>
+        <v-tab v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tab>
+        <v-tab v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tab>
+        <v-tab v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tab>
         <v-tabs-items class="white">
-          <v-tabs-content
+          <v-tab-item
             :id="'tab-lv'"
             v-if="busItem.station.lv"
           >
@@ -30,8 +28,8 @@
               :inStopName="busItem.station.lv.in_stop_name"
               :outStopName="busItem.station.lv.out_stop_name">
             </BusTable>
-          </v-tabs-content>
-          <v-tabs-content
+          </v-tab-item>
+          <v-tab-item
             :id="'tab-s'"
             v-if="busItem.station.s"
           >
@@ -40,8 +38,8 @@
               :inStopName="busItem.station.s.in_stop_name"
               :outStopName="busItem.station.s.out_stop_name">
             </BusTable>
-          </v-tabs-content>
-          <v-tabs-content
+          </v-tab-item>
+          <v-tab-item
             :id="'tab-d'"
             v-if="busItem.station.d"
           >
@@ -50,7 +48,7 @@
               :inStopName="busItem.station.d.in_stop_name"
               :outStopName="busItem.station.d.out_stop_name">
             </BusTable>
-          </v-tabs-content>
+          </v-tab-item>
         </v-tabs-items>
       </v-tabs>
     </div>

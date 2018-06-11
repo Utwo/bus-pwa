@@ -5,7 +5,7 @@ async function getBuses () {
   if (isLoadedAllData) {
     return loadedData
   }
-  const response = await fetch(`${process.env.API_URL}/buses_detail.json`)
+  const response = await fetch(`${process.env.VUE_APP_API_URL}/buses_detail.json`)
   loadedData = transformBusesResponse(await response.json())
   isLoadedAllData = true
   return loadedData
