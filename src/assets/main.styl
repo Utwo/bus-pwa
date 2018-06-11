@@ -1,18 +1,26 @@
 // $color-pack = false
 @import './_fonts';
-@import '../../node_modules/vuetify/src/stylus/app';
+@import '~vuetify/src/stylus/main'
 @import './_loading';
 
 li {
   list-style-position: inside
 }
 
+.navigation {
+  margin-bottom: 13px;
+}
+
 .navigation div.toolbar__content {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .hide-navigation .toolbar__extension {
   display: none
+}
+
+.hide-navigation div.toolbar__content{
+  margin-bottom: 0
 }
 
 .search__wrap {
@@ -79,8 +87,16 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
+  .navigation {
+    margin-bottom: 19px;
+  }
+
   .navigation div.toolbar__content {
     margin-bottom: 16px;
+  }
+
+  .hide-navigation div.toolbar__content{
+    margin-bottom: 0
   }
 
   .search-expand {
