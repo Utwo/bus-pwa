@@ -1,8 +1,8 @@
 <template functional>
-  <v-container class="text-xs-center" v-once>
+  <v-container v-once class="text-xs-center">
     <div class="ferry">
-      <div class="chimney"></div>
-      <div class="waves"></div>
+      <div class="chimney"/>
+      <div class="waves"/>
     </div>
   </v-container>
 </template>

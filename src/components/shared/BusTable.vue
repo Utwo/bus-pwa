@@ -1,8 +1,8 @@
 <template>
   <v-data-table
+    :items="hourList"
     hide-actions
     no-data-text="Nu sunt date disponibile"
-    :items="hourList"
     class="elevation-0 text-xs-center bus-table"
   >
     <tr slot="headers" slot-scope="props" class="grey lighten-4">

@@ -1,6 +1,6 @@
 <template functional>
   <transition name="fade">
-    <v-container fluid v-once>
+    <v-container v-once fluid>
       <h2 class="grey--text text--lighten-1">About</h2>
       <p>A simple bus schedule pwa app made in Vue.</p>
       <p>This app lets you to:</p>
@@ -15,9 +15,9 @@
         save bus lines and route information to json file.</p>
       <p>Bus Cluj is an open source project hosted on <a href="https://github.com/Utwo/bus-pwa">github</a>, feedback and contributions are always welcome and appreciated.
       </p>
-      <v-divider class="my-4"></v-divider>
+      <v-divider class="my-4"/>
       <div class="text-xs-center">
-        <img class="bus-icon" src="../assets/bus.svg" alt="bus icon" />
+        <img class="bus-icon" src="../assets/bus.svg" alt="bus icon" >
       </div>
     </v-container>
   </transition>

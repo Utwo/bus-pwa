@@ -1,5 +1,5 @@
 <template>
-  <v-list-tile avatar :key="title">
+  <v-list-tile :key="title" avatar>
     <v-list-tile-avatar>
       <v-icon :class="transportationStyle" class="white--text">{{transportationIcon}}</v-icon>
     </v-list-tile-avatar>

@@ -1,21 +1,21 @@
 <template>
   <v-container
+    v-touch="{right: () => this.$router.push('/')}"
     fluid
     grid-list-lg
-    v-touch="{right: () => this.$router.push('/')}"
   >
     <transition name="fade">
       <v-layout
-        row wrap
-        v-if="!isLoading"
+        v-if="!isLoading" row
+        wrap
       >
-        <v-flex xs12
-                v-for="bus in favoriteBuses"
+        <v-flex v-for="bus in favoriteBuses"
                 v-if="favoriteBuses.length !== 0"
-                :key="bus.name" :to="'bus/' + bus.name">
-          <favorite-item :bus="bus" :now="now"></favorite-item>
+                :key="bus.name"
+                :to="'bus/' + bus.name" xs12>
+          <favorite-item :bus="bus" :now="now"/>
         </v-flex>
-        <v-flex xs12 v-if="favoriteBuses.length === 0" class="text-xs-center py-4">
+        <v-flex v-if="favoriteBuses.length === 0" xs12 class="text-xs-center py-4">
           <h4 class="grey--text text--lighten-1">No favorites</h4>
           <p>For adding to favorites, press
             <v-icon color="pink">favorite</v-icon>
@@ -35,6 +35,11 @@ import FavoriteItem from "./FavoriteItem"
 import VCardMedia from "vuetify/src/components/VCard/VCardMedia"
 
 export default {
+  components: {
+    VCardMedia,
+    BaseLoading,
+    FavoriteItem
+  },
   data() {
     return {
       favoriteBuses: [],
@@ -42,11 +47,6 @@ export default {
       timer: null,
       now: Date.now()
     }
-  },
-  components: {
-    VCardMedia,
-    BaseLoading,
-    FavoriteItem
   },
   created() {
     this.fetchData()

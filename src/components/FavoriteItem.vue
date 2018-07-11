@@ -15,7 +15,7 @@
             <v-chip class="cyan lighten-4">
               {{ busWithStop.next_in_stop.formatTime }} - {{ busWithStop.next_in_stop.remainingTime }}
             </v-chip>
-            <v-progress-linear v-model="busWithStop.next_in_stop.progress"></v-progress-linear>
+            <v-progress-linear v-model="busWithStop.next_in_stop.progress"/>
           </div>
         </v-flex>
         <v-flex xs6>
@@ -25,7 +25,7 @@
             <v-chip color="red lighten-4">
               {{ busWithStop.next_out_stop.formatTime }} - {{ busWithStop.next_out_stop.remainingTime }}
             </v-chip>
-            <v-progress-linear v-model="busWithStop.next_out_stop.progress"></v-progress-linear>
+            <v-progress-linear v-model="busWithStop.next_out_stop.progress"/>
           </div>
         </v-flex>
       </v-layout>
@@ -42,7 +42,10 @@ export default {
       type: Object,
       required: true
     },
-    now: Number
+    now: {
+      default: Date.now(),
+      type: Number
+    }
   },
   computed: {
     busWithStop() {

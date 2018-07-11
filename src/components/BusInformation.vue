@@ -7,47 +7,44 @@
           {{ busItem.name }}
         </v-toolbar-title>
         <v-subheader class="grey--text">{{ busItem.type }} / {{ busItem.route }}</v-subheader>
-        <v-spacer></v-spacer>
-        <v-btn fab small class="favorite-btn" color="pink" :dark="!isFavorite" :outline="isFavorite" @click="addToFavorite">
+        <v-spacer/>
+        <v-btn :dark="!isFavorite" :outline="isFavorite" fab small class="favorite-btn" color="pink" @click="addToFavorite">
           <v-icon>favorite</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-divider class="grey lighten-3"></v-divider>
-      <v-tabs grow v-model="current_key" class="white" @input="scrollTo">
-        <v-tabs-slider class="yellow"></v-tabs-slider>
+      <v-divider class="grey lighten-3"/>
+      <v-tabs v-model="current_key" grow class="white" @input="scrollTo">
+        <v-tabs-slider class="yellow"/>
         <v-tab v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tab>
         <v-tab v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tab>
         <v-tab v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tab>
         <v-tabs-items class="white">
           <v-tab-item
-            :id="'tab-lv'"
             v-if="busItem.station.lv"
+            :id="'tab-lv'"
           >
             <BusTable
-              :hourList="busItem.station.lv.lines"
-              :inStopName="busItem.station.lv.in_stop_name"
-              :outStopName="busItem.station.lv.out_stop_name">
-            </BusTable>
+              :hour-list="busItem.station.lv.lines"
+              :in-stop-name="busItem.station.lv.in_stop_name"
+              :out-stop-name="busItem.station.lv.out_stop_name"/>
           </v-tab-item>
           <v-tab-item
-            :id="'tab-s'"
             v-if="busItem.station.s"
+            :id="'tab-s'"
           >
             <BusTable
-              :hourList="busItem.station.s.lines"
-              :inStopName="busItem.station.s.in_stop_name"
-              :outStopName="busItem.station.s.out_stop_name">
-            </BusTable>
+              :hour-list="busItem.station.s.lines"
+              :in-stop-name="busItem.station.s.in_stop_name"
+              :out-stop-name="busItem.station.s.out_stop_name"/>
           </v-tab-item>
           <v-tab-item
-            :id="'tab-d'"
             v-if="busItem.station.d"
+            :id="'tab-d'"
           >
             <BusTable
-              :hourList="busItem.station.d.lines"
-              :inStopName="busItem.station.d.in_stop_name"
-              :outStopName="busItem.station.d.out_stop_name">
-            </BusTable>
+              :hour-list="busItem.station.d.lines"
+              :in-stop-name="busItem.station.d.in_stop_name"
+              :out-stop-name="busItem.station.d.out_stop_name"/>
           </v-tab-item>
         </v-tabs-items>
       </v-tabs>
@@ -63,6 +60,10 @@ import BusTable from "./shared/BusTable"
 import BaseLoading from "./shared/BaseLoading"
 
 export default {
+  components: {
+    BusTable,
+    BaseLoading
+  },
   data() {
     return {
       busItem: null,
@@ -78,10 +79,6 @@ export default {
         this.current_key = `tab-${this.currentDayAbbreviation}`
       }
     }
-  },
-  components: {
-    BusTable,
-    BaseLoading
   },
   async created() {
     await this.fetchData()
