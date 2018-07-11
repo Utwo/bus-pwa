@@ -56,28 +56,28 @@
 </template>
 
 <script>
-  import LineService from '../services/LineService'
+import LineService from "../services/LineService"
 
-  export default {
-    data () {
-      return {
-        showNavigation: true,
-        hideIconSearch: false,
-        busLines: []
+export default {
+  data() {
+    return {
+      showNavigation: true,
+      hideIconSearch: false,
+      busLines: []
+    }
+  },
+  methods: {
+    async clickSelect() {
+      if (this.busLines.length === 0) {
+        this.busLines = await LineService.getBuses()
       }
     },
-    methods: {
-      async clickSelect () {
-        if (this.busLines.length === 0) {
-          this.busLines = await LineService.getBuses()
-        }
-      },
-      redirectTo (busItem) {
-        this.hideIconSearch = false
-        if (busItem.name) {
-          this.$router.push('/bus/' + busItem.name)
-        }
+    redirectTo(busItem) {
+      this.hideIconSearch = false
+      if (busItem.name) {
+        this.$router.push("/bus/" + busItem.name)
       }
     }
   }
+}
 </script>

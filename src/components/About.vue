@@ -24,16 +24,16 @@
 </template>
 
 <style scoped>
-  .bus-icon {
-    transition: .8s all ease-out .6s;
-  }
+.bus-icon {
+  transition: 0.8s all ease-out 0.6s;
+}
 
-  .fade-enter .bus-icon {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+.fade-enter .bus-icon {
+  opacity: 0;
+  transform: translateX(-100%);
+}
 
-  .fade-leave-active {
-    transition-duration: 0s;
-  }
+.fade-leave-active {
+  transition-duration: 0s;
+}
 </style>

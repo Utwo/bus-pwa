@@ -33,29 +33,30 @@
 </template>
 
 <script>
-  import LinesList from './LinesList'
-  import LineService from '../services/LineService'
-  import BaseLoading from './shared/BaseLoading'
+import LinesList from "./LinesList"
+import LineService from "../services/LineService"
+import BaseLoading from "./shared/BaseLoading"
 
-  export default {
-    data () {
-      return {
-        selectedType: [],
-        isLoading: true,
-        buses: []
-      }
-    },
-    components: {
-      LinesList, BaseLoading
-    },
-    created () {
-      this.fetchData()
-    },
-    methods: {
-      async fetchData () {
-        this.buses = await LineService.getBuses()
-        this.isLoading = false
-      }
+export default {
+  data() {
+    return {
+      selectedType: [],
+      isLoading: true,
+      buses: []
+    }
+  },
+  components: {
+    LinesList,
+    BaseLoading
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      this.buses = await LineService.getBuses()
+      this.isLoading = false
     }
   }
+}
 </script>

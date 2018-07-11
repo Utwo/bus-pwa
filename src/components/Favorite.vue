@@ -29,39 +29,39 @@
 </template>
 
 <script>
-  import LineService from '../services/LineService.js'
-  import BaseLoading from './shared/BaseLoading'
-  import FavoriteItem from './FavoriteItem'
-  import VCardMedia from 'vuetify/src/components/VCard/VCardMedia'
+import LineService from "../services/LineService.js"
+import BaseLoading from "./shared/BaseLoading"
+import FavoriteItem from "./FavoriteItem"
+import VCardMedia from "vuetify/src/components/VCard/VCardMedia"
 
-  export default {
-    data () {
-      return {
-        favoriteBuses: [],
-        isLoading: true,
-        timer: null,
-        now: Date.now()
-      }
-    },
-    components: {
-      VCardMedia,
-      BaseLoading,
-      FavoriteItem
-    },
-    created () {
-      this.fetchData()
-      this.timer = setInterval(() => {
-        this.now = Date.now()
-      }, 6000)
-    },
-    beforeDestroy () {
-      clearInterval(this.timer)
-    },
-    methods: {
-      async fetchData () {
-        this.favoriteBuses = await LineService.getFavorites()
-        this.isLoading = false
-      }
+export default {
+  data() {
+    return {
+      favoriteBuses: [],
+      isLoading: true,
+      timer: null,
+      now: Date.now()
+    }
+  },
+  components: {
+    VCardMedia,
+    BaseLoading,
+    FavoriteItem
+  },
+  created() {
+    this.fetchData()
+    this.timer = setInterval(() => {
+      this.now = Date.now()
+    }, 6000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
+  methods: {
+    async fetchData() {
+      this.favoriteBuses = await LineService.getFavorites()
+      this.isLoading = false
     }
   }
+}
 </script>

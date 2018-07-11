@@ -57,89 +57,100 @@
 </template>
 
 <script>
-  import LineService from '../services/LineService'
-  import CommonFunctions from '../services/CommonFunctions'
-  import BusTable from './shared/BusTable'
-  import BaseLoading from './shared/BaseLoading'
+import LineService from "../services/LineService"
+import CommonFunctions from "../services/CommonFunctions"
+import BusTable from "./shared/BusTable"
+import BaseLoading from "./shared/BaseLoading"
 
-  export default {
-    data () {
-      return {
-        busItem: null,
-        isFavorite: false,
-        isLoading: true,
-        current_key: null,
-        currentDayAbbreviation: CommonFunctions.getDayAbbreviation()
-      }
-    },
-    watch: {
-      busItem: function (newBusItem) {
-        if (newBusItem.station[this.currentDayAbbreviation]) {
-          this.current_key = `tab-${this.currentDayAbbreviation}`
-        }
-      }
-    },
-    components: {
-      BusTable, BaseLoading
-    },
-    async created () {
-      await this.fetchData()
-      this.isFavorite = LineService.isFavorite(this.$route.params.line)
-      this.scrollTo()
-    },
-    async beforeRouteUpdate (to, from, next) {
-      this.isLoading = true
-      next()
-      await this.fetchData()
-      this.isFavorite = LineService.isFavorite(this.$route.params.line)
-      this.scrollTo()
-    },
-    methods: {
-      async fetchData () {
-        this.busItem = await LineService.getLine(this.$route.params.line)
-        if (!this.busItem) {
-          this.$router.push('/not-found')
-        }
-        this.isLoading = false
-      },
-      addToFavorite () {
-        LineService.addToFavorite(this.$route.params.line)
-        this.isFavorite = !this.isFavorite
-      },
-      scrollTo () {
-        this.$nextTick(function () {
-          setTimeout(() => {
-            const scrollHereElement = document.getElementById(this.current_key).getElementsByClassName('scroll-here')[0]
-            if (scrollHereElement) {
-              scrollHereElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'start'})
-            }
-          }, 1000)
-        })
+export default {
+  data() {
+    return {
+      busItem: null,
+      isFavorite: false,
+      isLoading: true,
+      current_key: null,
+      currentDayAbbreviation: CommonFunctions.getDayAbbreviation()
+    }
+  },
+  watch: {
+    busItem: function(newBusItem) {
+      if (newBusItem.station[this.currentDayAbbreviation]) {
+        this.current_key = `tab-${this.currentDayAbbreviation}`
       }
     }
+  },
+  components: {
+    BusTable,
+    BaseLoading
+  },
+  async created() {
+    await this.fetchData()
+    this.isFavorite = LineService.isFavorite(this.$route.params.line)
+    this.scrollTo()
+  },
+  async beforeRouteUpdate(to, from, next) {
+    this.isLoading = true
+    next()
+    await this.fetchData()
+    this.isFavorite = LineService.isFavorite(this.$route.params.line)
+    this.scrollTo()
+  },
+  methods: {
+    async fetchData() {
+      this.busItem = await LineService.getLine(this.$route.params.line)
+      if (!this.busItem) {
+        this.$router.push("/not-found")
+      }
+      this.isLoading = false
+    },
+    addToFavorite() {
+      LineService.addToFavorite(this.$route.params.line)
+      this.isFavorite = !this.isFavorite
+    },
+    scrollTo() {
+      this.$nextTick(function() {
+        setTimeout(() => {
+          const scrollHereElement = document
+            .getElementById(this.current_key)
+            .getElementsByClassName("scroll-here")[0]
+          if (scrollHereElement) {
+            scrollHereElement.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "start"
+            })
+          }
+        }, 1000)
+      })
+    }
   }
+}
 </script>
 
 <style scoped>
-  .toolbar__title {
-    overflow: visible;
-  }
+.toolbar__title {
+  overflow: visible;
+}
 
-  .bus-info-transition-enter-active .toolbar, .bus-info-transition-leave-active .toolbar {
-    transition: .3s all ease-out;
-  }
+.bus-info-transition-enter-active .toolbar,
+.bus-info-transition-leave-active .toolbar {
+  transition: 0.3s all ease-out;
+}
 
-  .bus-info-transition-enter .toolbar, .bus-info-transition-leave-to .toolbar {
-    opacity: 0;
-    transform: translateY(-20%);
-  }
+.bus-info-transition-enter .toolbar,
+.bus-info-transition-leave-to .toolbar {
+  opacity: 0;
+  transform: translateY(-20%);
+}
 
-  .bus-info-transition-enter-active .favorite-btn, .bus-info-transition-leave-active .favorite-btn {
-    transition: .6s all ease-out 1.2s;
-  }
+.bus-info-transition-enter-active .favorite-btn,
+.bus-info-transition-leave-active .favorite-btn {
+  transition: 0.6s all ease-out 1.2s;
+}
 
-  .bus-info-transition-enter .favorite-btn, .bus-info-transition-leave-to .favorite-btn {
-    transform: translateX(80px) rotate(180deg);
-    opacity: 0;
-  }
+.bus-info-transition-enter .favorite-btn,
+.bus-info-transition-leave-to .favorite-btn {
+  transform: translateX(80px) rotate(180deg);
+  opacity: 0;
+}
 </style>

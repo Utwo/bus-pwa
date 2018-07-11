@@ -18,27 +18,27 @@
 </template>
 
 <script>
-  import IconMixin from '../../mixins/IconMixin'
+import IconMixin from "../../mixins/IconMixin"
 
-  export default {
-    mixins: [IconMixin],
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      transportationType: {
-        type: String,
-        required: true
-      },
-      route: {
-        type: String,
-        required: true
-      },
-      zone: {
-        type: String,
-        required: true
-      }
+export default {
+  mixins: [IconMixin],
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    transportationType: {
+      type: String,
+      required: true
+    },
+    route: {
+      type: String,
+      required: true
+    },
+    zone: {
+      type: String,
+      required: true
     }
   }
+}
 </script>

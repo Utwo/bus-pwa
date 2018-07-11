@@ -34,45 +34,52 @@
 </template>
 
 <script>
-  import commonFunctions from '../services/CommonFunctions.js'
+import commonFunctions from "../services/CommonFunctions.js"
 
-  export default {
-    props: {
-      bus: {
-        type: Object,
-        required: true
-      },
-      now: Number
+export default {
+  props: {
+    bus: {
+      type: Object,
+      required: true
     },
-    computed: {
-      busWithStop () {
-        console.debug(this.now) // keep this to force computed update
-        const todayAbbreviation = commonFunctions.getDayAbbreviation()
-        if (this.bus.station[todayAbbreviation]) {
-          const {in_stop_name, out_stop_name} = this.bus.station[todayAbbreviation]
-          const todayHourList = commonFunctions.getTodayHourList(this.bus)
-          const nextStation = commonFunctions.calculateNextStationTime(todayHourList)
-          return Object.assign(this.bus, nextStation, {in_stop_name, out_stop_name})
-        }
-        return this.bus
-      },
-      transportationStyle () {
-        return {
-          'deep-purple': this.bus.type === 'tramvaie',
-          'cyan': this.bus.type === 'autobuze',
-          'orange': this.bus.type === 'microbuze',
-          'pink': this.bus.type === 'troleibuze'
-        }
-      },
-      transportationIcon () {
-        const icon = {
-          'tramvaie': 'tram',
-          'autobuze': 'directions_bus',
-          'microbuze': 'local_shipping',
-          'troleibuze': 'directions_transit'
-        }
-        return icon[this.bus.type]
+    now: Number
+  },
+  computed: {
+    busWithStop() {
+      console.debug(this.now) // keep this to force computed update
+      const todayAbbreviation = commonFunctions.getDayAbbreviation()
+      if (this.bus.station[todayAbbreviation]) {
+        const { in_stop_name, out_stop_name } = this.bus.station[
+          todayAbbreviation
+        ]
+        const todayHourList = commonFunctions.getTodayHourList(this.bus)
+        const nextStation = commonFunctions.calculateNextStationTime(
+          todayHourList
+        )
+        return Object.assign(this.bus, nextStation, {
+          in_stop_name,
+          out_stop_name
+        })
       }
+      return this.bus
+    },
+    transportationStyle() {
+      return {
+        "deep-purple": this.bus.type === "tramvaie",
+        cyan: this.bus.type === "autobuze",
+        orange: this.bus.type === "microbuze",
+        pink: this.bus.type === "troleibuze"
+      }
+    },
+    transportationIcon() {
+      const icon = {
+        tramvaie: "tram",
+        autobuze: "directions_bus",
+        microbuze: "local_shipping",
+        troleibuze: "directions_transit"
+      }
+      return icon[this.bus.type]
     }
   }
+}
 </script>

@@ -8,35 +8,36 @@
 </template>
 
 <script>
-  import BaseList from './shared/BaseList'
-  import BaseListItem from './shared/BaseListItem'
+import BaseList from "./shared/BaseList"
+import BaseListItem from "./shared/BaseListItem"
 
-  export default {
-    props: {
-      selectedType: {
-        type: Array,
-        required: false
-      },
-      buses: {
-        type: Array,
-        required: true
-      }
+export default {
+  props: {
+    selectedType: {
+      type: Array,
+      required: false
     },
-    components: {
-      BaseList, BaseListItem
-    },
-    computed: {
-      filteredBuses () {
-        let filtered = this.buses
-        if (this.selectedType.length > 0) {
-          filtered = filtered.filter(item => {
-            if (this.selectedType.indexOf(item.type) > -1) {
-              return true
-            }
-          })
-        }
-        return filtered
+    buses: {
+      type: Array,
+      required: true
+    }
+  },
+  components: {
+    BaseList,
+    BaseListItem
+  },
+  computed: {
+    filteredBuses() {
+      let filtered = this.buses
+      if (this.selectedType.length > 0) {
+        filtered = filtered.filter(item => {
+          if (this.selectedType.indexOf(item.type) > -1) {
+            return true
+          }
+        })
       }
+      return filtered
     }
   }
+}
 </script>

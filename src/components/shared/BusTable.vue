@@ -29,36 +29,44 @@
 </template>
 
 <script>
-  import commonFunctions from '../../services/CommonFunctions'
-  import format from 'date-fns/format'
+import commonFunctions from "../../services/CommonFunctions"
+import format from "date-fns/format"
 
-  export default {
-    props: {
-      hourList: {
-        type: Array,
-        required: true
-      },
-      inStopName: {
-        type: String,
-        required: true
-      },
-      outStopName: {
-        type: String,
-        required: true
-      }
+export default {
+  props: {
+    hourList: {
+      type: Array,
+      required: true
     },
-    data () {
-      return {
-        nextInStopTime: null,
-        nextOutStopTime: null
-      }
+    inStopName: {
+      type: String,
+      required: true
     },
-    mounted () {
-      if (this._props.hourList.length > 0) {
-        const nextStationTime = commonFunctions.calculateNextStationTime(this._props.hourList)
-        this.nextInStopTime = format(nextStationTime.next_in_stop.nextDateTime, 'HH:mm')
-        this.nextOutStopTime = format(nextStationTime.next_out_stop.nextDateTime, 'HH:mm')
-      }
+    outStopName: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      nextInStopTime: null,
+      nextOutStopTime: null
+    }
+  },
+  mounted() {
+    if (this._props.hourList.length > 0) {
+      const nextStationTime = commonFunctions.calculateNextStationTime(
+        this._props.hourList
+      )
+      this.nextInStopTime = format(
+        nextStationTime.next_in_stop.nextDateTime,
+        "HH:mm"
+      )
+      this.nextOutStopTime = format(
+        nextStationTime.next_out_stop.nextDateTime,
+        "HH:mm"
+      )
     }
   }
+}
 </script>

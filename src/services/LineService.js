@@ -1,17 +1,19 @@
 let loadedData = []
 let isLoadedAllData = false
 
-async function getBuses () {
+async function getBuses() {
   if (isLoadedAllData) {
     return loadedData
   }
-  const response = await fetch(`${process.env.VUE_APP_API_URL}/buses_detail.json`)
+  const response = await fetch(
+    `${process.env.VUE_APP_API_URL}/buses_detail.json`
+  )
   loadedData = transformBusesResponse(await response.json())
   isLoadedAllData = true
   return loadedData
 }
 
-async function getLine (lineName) {
+async function getLine(lineName) {
   if (!isLoadedAllData) {
     await getBuses()
   }
@@ -22,19 +24,23 @@ async function getLine (lineName) {
   }
 }
 
-function addToFavorite (lineNumber) {
-  const myFavorites = localStorage.getItem('myFavorites') ? JSON.parse(localStorage.getItem('myFavorites')) : []
+function addToFavorite(lineNumber) {
+  const myFavorites = localStorage.getItem("myFavorites")
+    ? JSON.parse(localStorage.getItem("myFavorites"))
+    : []
   if (myFavorites.indexOf(lineNumber) > -1) {
     myFavorites.splice(myFavorites.indexOf(lineNumber), 1)
   } else {
     myFavorites.push(lineNumber)
   }
-  localStorage.setItem('myFavorites', JSON.stringify(myFavorites))
+  localStorage.setItem("myFavorites", JSON.stringify(myFavorites))
 }
 
-async function getFavorites () {
+async function getFavorites() {
   const favorites = []
-  const favoriteNameList = localStorage.getItem('myFavorites') ? JSON.parse(localStorage.getItem('myFavorites')) : []
+  const favoriteNameList = localStorage.getItem("myFavorites")
+    ? JSON.parse(localStorage.getItem("myFavorites"))
+    : []
   if (!isLoadedAllData) {
     await getBuses()
   }
@@ -44,15 +50,15 @@ async function getFavorites () {
   return Promise.all(favorites)
 }
 
-function isFavorite (lineNumber) {
-  if (!localStorage.getItem('myFavorites')) {
+function isFavorite(lineNumber) {
+  if (!localStorage.getItem("myFavorites")) {
     return false
   }
-  const favoriteNameList = JSON.parse(localStorage.getItem('myFavorites'))
+  const favoriteNameList = JSON.parse(localStorage.getItem("myFavorites"))
   return favoriteNameList.indexOf(lineNumber) >= 0
 }
 
-function transformBusesResponse (buses) {
+function transformBusesResponse(buses) {
   const newResponse = []
   for (let busesLines of Object.entries(buses)) {
     busesLines[1].map(bus => {
@@ -63,5 +69,4 @@ function transformBusesResponse (buses) {
   return newResponse
 }
 
-export default {getBuses, getLine, addToFavorite, getFavorites, isFavorite}
-
+export default { getBuses, getLine, addToFavorite, getFavorites, isFavorite }

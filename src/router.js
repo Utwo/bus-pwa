@@ -1,44 +1,44 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import BusLines from './components/BusLines.vue'
-import Favorite from './components/Favorite.vue'
+import Vue from "vue"
+import Router from "vue-router"
+import BusLines from "./components/BusLines.vue"
+import Favorite from "./components/Favorite.vue"
 
-const About = () => import('./components/About.vue')
-const NotFound = () => import('./components/NotFound.vue')
-const BusInformation = () => import('./components/BusInformation.vue')
+const About = () => import("./components/About.vue")
+const NotFound = () => import("./components/NotFound.vue")
+const BusInformation = () => import("./components/BusInformation.vue")
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   routes: [
     {
-      path: '/',
-      name: 'BusLines',
+      path: "/",
+      name: "BusLines",
       component: BusLines
     },
     {
-      path: '/bus/:line',
-      name: 'BusInformation',
+      path: "/bus/:line",
+      name: "BusInformation",
       component: BusInformation
     },
     {
-      path: '/favorite',
-      name: 'Favorite',
+      path: "/favorite",
+      name: "Favorite",
       component: Favorite
     },
     {
-      path: '/about',
-      name: 'About',
+      path: "/about",
+      name: "About",
       component: About
     },
     {
-      path: '/404',
+      path: "/404",
       component: NotFound
     },
     {
-      path: '*',
-      redirect: '/404'
+      path: "*",
+      redirect: "/404"
     }
   ]
 })
