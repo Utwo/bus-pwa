@@ -5,7 +5,7 @@ module.exports = {
       runtimeCaching: [
         {
           urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
-          handler: "cacheFirst",
+          handler: "staleWhileRevalidate",
           options: {
             cacheName: "ctpcj-scraper",
             expiration: {
