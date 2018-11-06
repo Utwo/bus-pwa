@@ -1,0 +1,11 @@
+# The following redirect is intended for use with most SPA's that handles routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "http://buscluj.netlify.com/*"
+  to = "https://buscluj.netlify.com/"
+  status = 301
+  force = true
