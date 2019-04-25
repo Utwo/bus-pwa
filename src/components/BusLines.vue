@@ -1,34 +1,56 @@
 <template>
-  <div
-    v-touch="{left: () => this.$router.push('/favorite')}"
-  >
+  <div v-touch="{ left: () => this.$router.push('/favorite') }">
     <v-container fluid>
       <v-layout row wrap>
         <v-flex xs6 sm3 md3>
-          <v-checkbox v-model="selectedType" label="autobuze" name="autobuze" value="autobuze" color="cyan">
-            <v-icon/>
+          <v-checkbox
+            v-model="selectedType"
+            label="autobuze"
+            name="autobuze"
+            value="autobuze"
+            color="cyan"
+          >
+            <v-icon />
             autobuze
           </v-checkbox>
         </v-flex>
         <v-flex xs6 sm3 md3>
-          <v-checkbox v-model="selectedType" label="troleibuze" name="troleibuze" value="troleibuze" color="pink">
+          <v-checkbox
+            v-model="selectedType"
+            label="troleibuze"
+            name="troleibuze"
+            value="troleibuze"
+            color="pink"
+          >
             troleibuze
           </v-checkbox>
         </v-flex>
         <v-flex xs6 sm3 md3>
-          <v-checkbox v-model="selectedType" label="tramvaie" name="tramvaie" value="tramvaie" color="deep-purple">
+          <v-checkbox
+            v-model="selectedType"
+            label="tramvaie"
+            name="tramvaie"
+            value="tramvaie"
+            color="deep-purple"
+          >
             tramvaie
           </v-checkbox>
         </v-flex>
         <v-flex xs6 sm3 md3>
-          <v-checkbox v-model="selectedType" label="microbuze" name="microbuze" value="microbuze" color="orange">
+          <v-checkbox
+            v-model="selectedType"
+            label="microbuze"
+            name="microbuze"
+            value="microbuze"
+            color="orange"
+          >
             microbuze
           </v-checkbox>
         </v-flex>
       </v-layout>
     </v-container>
-    <LinesList v-if="!isLoading" :selected-type="selectedType" :buses="buses"/>
-    <BaseLoading v-if="isLoading"/>
+    <LinesList v-if="!isLoading" :selected-type="selectedType" :buses="buses" />
+    <BaseLoading v-if="isLoading" />
   </div>
 </template>
 

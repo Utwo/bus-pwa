@@ -5,23 +5,25 @@
     no-data-text="Nu sunt date disponibile"
     class="elevation-0 text-xs-center bus-table"
   >
-    <tr slot="headers" slot-scope="props" class="grey lighten-4">
+    <tr slot="headers" class="grey lighten-4">
       <th>{{ inStopName }}</th>
       <th>{{ outStopName }}</th>
     </tr>
     <tr slot="items" slot-scope="props">
       <td
         :class="{
-        'green--text': props.item[0] >= nextInStopTime,
-        'scroll-here': props.item[0] === nextInStopTime
-      }">
+          'green--text': props.item[0] >= nextInStopTime,
+          'scroll-here': props.item[0] === nextInStopTime
+        }"
+      >
         {{ props.item[0] }}
       </td>
       <td
         :class="{
-        'green--text': props.item[1] >= nextOutStopTime,
-        'scroll-here': props.item[1] === nextOutStopTime
-      }">
+          'green--text': props.item[1] >= nextOutStopTime,
+          'scroll-here': props.item[1] === nextOutStopTime
+        }"
+      >
         {{ props.item[1] }}
       </td>
     </tr>

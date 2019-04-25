@@ -1,30 +1,34 @@
 <template>
   <v-container
-    v-touch="{right: () => this.$router.push('/')}"
+    v-touch="{ right: () => this.$router.push('/') }"
     fluid
     grid-list-lg
   >
     <transition name="fade">
-      <v-layout
-        v-if="!isLoading" row
-        wrap
-      >
-        <v-flex v-for="bus in favoriteBuses"
-                v-if="favoriteBuses.length !== 0"
-                :key="bus.name"
-                :to="'bus/' + bus.name" xs12>
-          <favorite-item :bus="bus" :now="now"/>
+      <v-layout v-if="!isLoading" row wrap>
+        <v-flex
+          v-for="bus in favoriteBuses"
+          v-if="favoriteBuses.length !== 0"
+          :key="bus.name"
+          :to="'bus/' + bus.name"
+          xs12
+        >
+          <favorite-item :bus="bus" :now="now" />
         </v-flex>
-        <v-flex v-if="favoriteBuses.length === 0" xs12 class="text-xs-center py-4">
+        <v-flex
+          v-if="favoriteBuses.length === 0"
+          xs12
+          class="text-xs-center py-4"
+        >
           <h4 class="grey--text text--lighten-1">No favorites</h4>
-          <p>For adding to favorites, press
-            <v-icon color="pink">favorite</v-icon>
-            icon on bus information page
+          <p>
+            For adding to favorites, press
+            <v-icon color="pink">favorite</v-icon>icon on bus information page
           </p>
         </v-flex>
       </v-layout>
     </transition>
-    <BaseLoading v-if="isLoading"/>
+    <BaseLoading v-if="isLoading" />
   </v-container>
 </template>
 
@@ -32,11 +36,9 @@
 import LineService from "../services/LineService.js"
 import BaseLoading from "./shared/BaseLoading"
 import FavoriteItem from "./FavoriteItem"
-import VCardMedia from "vuetify/src/components/VCard/VCardMedia"
 
 export default {
   components: {
-    VCardMedia,
     BaseLoading,
     FavoriteItem
   },

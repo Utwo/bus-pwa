@@ -3,14 +3,11 @@ import Router from "vue-router"
 import BusLines from "./components/BusLines.vue"
 import Favorite from "./components/Favorite.vue"
 
-const About = () => import("./components/About.vue")
-const NotFound = () => import("./components/NotFound.vue")
-const BusInformation = () => import("./components/BusInformation.vue")
-
 Vue.use(Router)
 
 export default new Router({
   mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
@@ -20,7 +17,8 @@ export default new Router({
     {
       path: "/bus/:line",
       name: "BusInformation",
-      component: BusInformation
+      component: () =>
+        import(/* webpackChunkName: "busInformation" */ "./components/BusInformation.vue")
     },
     {
       path: "/favorite",
@@ -30,11 +28,13 @@ export default new Router({
     {
       path: "/about",
       name: "About",
-      component: About
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./components/About.vue")
     },
     {
       path: "/404",
-      component: NotFound
+      component: () =>
+        import(/* webpackChunkName: "notFound" */ "./components/NotFound.vue")
     },
     {
       path: "*",

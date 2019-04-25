@@ -31,7 +31,7 @@ save bus lines and route information to json file
 Clone that open source project to generate real data.
 
 ## Todo
-- [ ] SSR
+- [ ] Update to Vuetify 2 (set tag attribute to each component)
 - [ ] Prerender
 - [ ] Change $color-pack to false
 - [ ] Choose better colors

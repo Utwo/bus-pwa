@@ -1,8 +1,12 @@
 <template>
   <v-card :to="'/bus/' + busWithStop.name" class="black--text">
     <v-card-title>
-      <h2 class="headline avatar mb-0">
-        <v-icon :class="transportationStyle" class="pa-1 mr-2 white--text">{{transportationIcon}}</v-icon>
+      <h2 class="headline mb-0">
+        <v-avatar size="38">
+          <v-icon dark :class="transportationStyle">{{
+            transportationIcon
+          }}</v-icon>
+        </v-avatar>
         {{ busWithStop.name }}
       </h2>
     </v-card-title>
@@ -10,22 +14,26 @@
       <v-layout row wrap class="text-xs-center">
         <v-flex xs6>
           <div v-if="busWithStop.next_in_stop">
-            <h4>{{ busWithStop.in_stop_name }}</h4>
-            {{ busWithStop.next_in_stop.currentDateTime }} <span class="grey--text text--lighten-1"> # </span>
+            <h3 class="font-weight-regular">{{ busWithStop.in_stop_name }}</h3>
+            {{ busWithStop.next_in_stop.currentDateTime }}
+            <span class="grey--text text--lighten-1"> # </span>
             <v-chip class="cyan lighten-4">
-              {{ busWithStop.next_in_stop.formatTime }} - {{ busWithStop.next_in_stop.remainingTime }}
+              {{ busWithStop.next_in_stop.formatTime }} -
+              {{ busWithStop.next_in_stop.remainingTime }}
             </v-chip>
-            <v-progress-linear v-model="busWithStop.next_in_stop.progress"/>
+            <v-progress-linear v-model="busWithStop.next_in_stop.progress" />
           </div>
         </v-flex>
         <v-flex xs6>
           <div v-if="busWithStop.next_out_stop">
-            <h4>{{ busWithStop.out_stop_name }}</h4>
-            {{ busWithStop.next_out_stop.currentDateTime }} <span class="grey--text text--lighten-1"> # </span>
+            <h3 class="font-weight-regular">{{ busWithStop.out_stop_name }}</h3>
+            {{ busWithStop.next_out_stop.currentDateTime }}
+            <span class="grey--text text--lighten-1"> # </span>
             <v-chip color="red lighten-4">
-              {{ busWithStop.next_out_stop.formatTime }} - {{ busWithStop.next_out_stop.remainingTime }}
+              {{ busWithStop.next_out_stop.formatTime }} -
+              {{ busWithStop.next_out_stop.remainingTime }}
             </v-chip>
-            <v-progress-linear v-model="busWithStop.next_out_stop.progress"/>
+            <v-progress-linear v-model="busWithStop.next_out_stop.progress" />
           </div>
         </v-flex>
       </v-layout>

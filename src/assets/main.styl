@@ -1,26 +1,33 @@
 // $color-pack = false
 @import './_fonts';
-@import '~vuetify/src/stylus/main'
+@import '~vuetify/src/stylus/app.styl'
 @import './_loading';
 
 li {
   list-style-position: inside
 }
 
+a {
+  color: $primary
+  text-decoration: none
+}
+
 .navigation {
   margin-bottom: 13px;
 }
 
-.navigation div.toolbar__content {
-  margin-bottom: 12px;
+.v-toolbar__content .v-input__slot {
+  margin: 0;
 }
 
-.hide-navigation .toolbar__extension {
-  display: none
+.v-toolbar__extension {
+  margin-top: 12px;
+  padding: 0;
 }
 
-.hide-navigation div.toolbar__content{
-  margin-bottom: 0
+.navigation .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
+  background: none;
+  box-shadow: none;
 }
 
 .search__wrap {
@@ -55,11 +62,6 @@ li {
   overflow: hidden;
 }
 
-a {
-  color: $primary
-  text-decoration: none
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: .4s all ease-out;
   transform-origin: 50% 100%;
@@ -68,7 +70,7 @@ a {
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(30px);
 }
 
 .progress-linear__bar__determinate.primary {
@@ -87,31 +89,13 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
-  .navigation {
-    margin-bottom: 19px;
-  }
-
-  .navigation div.toolbar__content {
-    margin-bottom: 16px;
-  }
-
-  .hide-navigation div.toolbar__content{
-    margin-bottom: 0
-  }
-
   .search-expand {
     position: absolute;
     z-index: 999;
-    top: 0;
+    top: 3px;
     left: 0;
-    margin-top: 3px;
-    width: 100%;
+    width: 75%;
     transition: .4s all;
-  }
-
-  .search-expand .input-group--solo {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
   }
 
   .hide-search--mobile {

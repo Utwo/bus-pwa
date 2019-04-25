@@ -1,10 +1,16 @@
 <template>
-    <transition name="fade">
-      <BaseList :list="filteredBuses">
-        <BaseListItem slot-scope="bus" :key="bus.name" :title="bus.name" :route="bus.route"
-                      :transportation-type="bus.type" :zone="bus.lineType"/>
-      </BaseList>
-    </transition>
+  <transition name="fade">
+    <BaseList :list="filteredBuses">
+      <BaseListItem
+        :key="bus.name"
+        slot-scope="bus"
+        :title="bus.name"
+        :route="bus.route"
+        :transportation-type="bus.type"
+        :zone="bus.lineType"
+      />
+    </BaseList>
+  </transition>
 </template>
 
 <script>
