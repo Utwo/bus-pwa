@@ -1,41 +1,38 @@
 <template>
-  <v-container
-    v-touch="{ right: () => this.$router.push('/') }"
-    fluid
-    grid-list-lg
-  >
+  <v-container v-touch="{ right: () => this.$router.push('/') }">
     <transition name="fade">
-      <v-layout v-if="!isLoading" row wrap>
-        <v-flex
+      <v-row v-if="!isLoading && favoriteBuses.length">
+        <v-col
           v-for="bus in favoriteBuses"
-          v-if="favoriteBuses.length !== 0"
           :key="bus.name"
           :to="'bus/' + bus.name"
-          xs12
+          cols="12"
         >
           <favorite-item :bus="bus" :now="now" />
-        </v-flex>
-        <v-flex
+        </v-col>
+      </v-row>
+      <v-row v-if="!isLoading && favoriteBuses.length === 0">
+        <v-col
           v-if="favoriteBuses.length === 0"
-          xs12
-          class="text-xs-center py-4"
+          cols="12"
+          class="text-center py-6"
         >
           <h4 class="grey--text text--lighten-1">No favorites</h4>
           <p>
             For adding to favorites, press
             <v-icon color="pink">favorite</v-icon>icon on bus information page
           </p>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </transition>
     <BaseLoading v-if="isLoading" />
   </v-container>
 </template>
 
 <script>
-import LineService from "../services/LineService.js"
-import BaseLoading from "./shared/BaseLoading"
-import FavoriteItem from "./FavoriteItem"
+import LineService from "../services/LineService.js";
+import BaseLoading from "./shared/BaseLoading";
+import FavoriteItem from "./FavoriteItem";
 
 export default {
   components: {
@@ -48,22 +45,22 @@ export default {
       isLoading: true,
       timer: null,
       now: Date.now()
-    }
+    };
   },
   created() {
-    this.fetchData()
+    this.fetchData();
     this.timer = setInterval(() => {
-      this.now = Date.now()
-    }, 6000)
+      this.now = Date.now();
+    }, 6000);
   },
   beforeDestroy() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
   },
   methods: {
     async fetchData() {
-      this.favoriteBuses = await LineService.getFavorites()
-      this.isLoading = false
+      this.favoriteBuses = await LineService.getFavorites();
+      this.isLoading = false;
     }
   }
-}
+};
 </script>

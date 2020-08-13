@@ -3,19 +3,12 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier"],
-  rules: {
-    "no-console": "off",
-    "no-debugger": "off",
-    semi: "off",
-    "vue/attribute-hyphenation": ["error", "always"],
-    "vue/require-default-prop": "error",
-    "vue/require-prop-types": "error",
-    "vue/attributes-order": "error",
-    "vue/order-in-components": "error",
-    "vue/no-use-v-if-with-v-for": false
-  },
+  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
   parserOptions: {
     parser: "babel-eslint"
+  },
+  rules: {
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off"
   }
-}
+};

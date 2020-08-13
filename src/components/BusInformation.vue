@@ -1,17 +1,15 @@
 <template>
   <transition name="bus-info-transition">
     <div v-if="busItem && !isLoading">
-      <v-toolbar card class="white" prominent>
-        <v-toolbar-title class="grey--text text--darken-4 headline">
+      <v-toolbar class="white">
+        <v-toolbar-title class="headline">
           {{ busItem.name }}
         </v-toolbar-title>
-        <v-subheader class="grey--text"
-          >{{ busItem.type }} / {{ busItem.route }}</v-subheader
-        >
+        <v-subheader>{{ busItem.type }} / {{ busItem.route }}</v-subheader>
         <v-spacer />
         <v-btn
           :dark="!isFavorite"
-          :outline="isFavorite"
+          :outlined="isFavorite"
           fab
           small
           class="favorite-btn"
@@ -21,13 +19,12 @@
           <v-icon>favorite</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-divider class="grey lighten-3" />
       <v-tabs v-model="current_key" grow class="white" @change="scrollTo">
         <v-tabs-slider class="yellow" />
         <v-tab v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tab>
         <v-tab v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tab>
         <v-tab v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tab>
-        <v-tabs-items class="white">
+        <v-tabs-items class="white" v-model="current_key">
           <v-tab-item v-if="busItem.station.lv" id="tab-lv">
             <BusTable
               :hour-list="busItem.station.lv.lines"
@@ -57,10 +54,10 @@
 </template>
 
 <script>
-import LineService from "../services/LineService"
-import CommonFunctions from "../services/CommonFunctions"
-import BusTable from "./shared/BusTable"
-import BaseLoading from "./shared/BaseLoading"
+import LineService from "../services/LineService";
+import CommonFunctions from "../services/CommonFunctions";
+import BusTable from "./shared/BusTable";
+import BaseLoading from "./shared/BaseLoading";
 
 export default {
   components: {
@@ -74,57 +71,57 @@ export default {
       isLoading: true,
       current_key: null,
       currentDayAbbreviation: CommonFunctions.getDayAbbreviation()
-    }
+    };
   },
   watch: {
     busItem: function(newBusItem) {
       if (newBusItem.station[this.currentDayAbbreviation]) {
-        this.current_key = `tab-${this.currentDayAbbreviation}`
+        this.current_key = `tab-${this.currentDayAbbreviation}`;
       }
     }
   },
   async created() {
-    await this.fetchData()
-    this.isFavorite = LineService.isFavorite(this.$route.params.line)
-    this.scrollTo()
+    await this.fetchData();
+    this.isFavorite = LineService.isFavorite(this.$route.params.line);
+    this.scrollTo();
   },
   async beforeRouteUpdate(to, from, next) {
-    this.isLoading = true
-    next()
-    await this.fetchData()
-    this.isFavorite = LineService.isFavorite(this.$route.params.line)
-    this.scrollTo()
+    this.isLoading = true;
+    next();
+    await this.fetchData();
+    this.isFavorite = LineService.isFavorite(this.$route.params.line);
+    this.scrollTo();
   },
   methods: {
     async fetchData() {
-      this.busItem = await LineService.getLine(this.$route.params.line)
+      this.busItem = await LineService.getLine(this.$route.params.line);
       if (!this.busItem) {
-        this.$router.push("/not-found")
+        this.$router.push("/not-found");
       }
-      this.isLoading = false
+      this.isLoading = false;
     },
     addToFavorite() {
-      LineService.addToFavorite(this.$route.params.line)
-      this.isFavorite = !this.isFavorite
+      LineService.addToFavorite(this.$route.params.line);
+      this.isFavorite = !this.isFavorite;
     },
     scrollTo() {
       this.$nextTick(function() {
         setTimeout(() => {
           const scrollHereElement = document
             .getElementById(this.current_key)
-            .getElementsByClassName("scroll-here")[0]
+            .getElementsByClassName("scroll-here")[0];
           if (scrollHereElement) {
             scrollHereElement.scrollIntoView({
               behavior: "smooth",
               block: "center",
               inline: "start"
-            })
+            });
           }
-        }, 1000)
-      })
+        }, 1000);
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

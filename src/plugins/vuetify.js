@@ -1,10 +1,12 @@
-import Vue from "vue"
-import Vuetify from "vuetify/lib"
-import "../assets/main.styl"
+import Vue from "vue";
+import Vuetify from "vuetify/lib";
+import "../../scss/main.scss";
 
 Vue.use(Vuetify, {
   options: {
     customProperties: true
   },
   iconfont: "md"
-})
+});
+
+export default new Vuetify({});

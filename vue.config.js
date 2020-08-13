@@ -1,11 +1,12 @@
 module.exports = {
+  transpileDependencies: ["vuetify"],
   pwa: {
     name: "BusPwa",
     workboxOptions: {
       runtimeCaching: [
         {
           urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
-          handler: "staleWhileRevalidate",
+          handler: "StaleWhileRevalidate",
           options: {
             cacheName: "ctpcj-scraper",
             expiration: {
@@ -17,4 +18,4 @@ module.exports = {
       ]
     }
   }
-}
+};

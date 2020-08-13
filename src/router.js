@@ -1,9 +1,9 @@
-import Vue from "vue"
-import Router from "vue-router"
-import BusLines from "./components/BusLines.vue"
-import Favorite from "./components/Favorite.vue"
+import Vue from "vue";
+import Router from "vue-router";
+import BusLines from "./components/BusLines.vue";
+import Favorite from "./components/Favorite.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: "history",
@@ -18,7 +18,9 @@ export default new Router({
       path: "/bus/:line",
       name: "BusInformation",
       component: () =>
-        import(/* webpackChunkName: "busInformation" */ "./components/BusInformation.vue")
+        import(
+          /* webpackChunkName: "busInformation" */ "./components/BusInformation.vue"
+        )
     },
     {
       path: "/favorite",
@@ -41,4 +43,4 @@ export default new Router({
       redirect: "/404"
     }
   ]
-})
+});
