@@ -38,7 +38,7 @@
 
 <script>
 import commonFunctions from "../../services/CommonFunctions";
-import format from "date-fns/format";
+import { format } from "date-fns";
 
 export default {
   props: {

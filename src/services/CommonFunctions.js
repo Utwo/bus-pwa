@@ -4,9 +4,6 @@ import {
   formatDistanceToNow,
   differenceInSeconds
 } from "date-fns";
-// import formatDistanceToNow from "date-fns/distance_in_words_to_now";
-// import isFuture from "date-fns/is_future";
-// import differenceInSeconds from "date-fns/difference_in_seconds";
 export default {
   calculateNextStationTime,
   getDayAbbreviation,
