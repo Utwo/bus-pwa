@@ -4,7 +4,7 @@
     dark
     flat
     :absolute="true"
-    color="green lighten-1"
+    color="teal accent-3"
     extended
     extension-height="60"
   >
@@ -27,7 +27,7 @@
       placeholder="Search"
       label="Search"
       class="px-2"
-      background-color="green lighten-1"
+      background-color="teal accent-4"
       item-text="name"
       cache-items
       return-object

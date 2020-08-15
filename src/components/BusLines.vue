@@ -5,7 +5,7 @@
       v-model="selectedType"
       clearable
       full-width
-      item-color="green"
+      item-color="teal"
       solo
       label="Filtreaza..."
     ></v-select>

@@ -26,8 +26,8 @@
               </v-chip>
               <v-progress-linear
                 class="mt-5"
-                background-color="green lighten-4"
-                color="green"
+                background-color="teal lighten-4"
+                color="teal accent-4"
                 height="8"
                 rounded
                 v-model="busWithStop.next_in_stop.progress"
@@ -47,8 +47,8 @@
               </v-chip>
               <v-progress-linear
                 class="mt-5"
-                background-color="green lighten-4"
-                color="green"
+                background-color="teal lighten-4"
+                color="teal accent-4"
                 height="8"
                 rounded
                 v-model="busWithStop.next_out_stop.progress"
