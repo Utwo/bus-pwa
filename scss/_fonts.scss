@@ -2,6 +2,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: local("Roboto"), local("Roboto-Regular"),
     url(https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxK.woff2)
       format("woff2");
@@ -14,6 +15,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src: local("Roboto Medium"), local("Roboto-Medium"),
     url(https://fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmEU9fBBc4.woff2)
       format("woff2");
@@ -27,6 +29,7 @@
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/materialicons/v54/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
     format("woff2");
 }
