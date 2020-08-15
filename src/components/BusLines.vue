@@ -1,54 +1,14 @@
 <template>
   <div v-touch="{ left: () => this.$router.push('/favorite') }">
-    <v-container fluid>
-      <v-row>
-        <v-col cols="6" sm="3">
-          <v-checkbox
-            v-model="selectedType"
-            label="autobuze"
-            name="autobuze"
-            value="autobuze"
-            color="cyan"
-          >
-            <v-icon />
-            autobuze
-          </v-checkbox>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-checkbox
-            v-model="selectedType"
-            label="troleibuze"
-            name="troleibuze"
-            value="troleibuze"
-            color="pink"
-          >
-            troleibuze
-          </v-checkbox>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-checkbox
-            v-model="selectedType"
-            label="tramvaie"
-            name="tramvaie"
-            value="tramvaie"
-            color="deep-purple"
-          >
-            tramvaie
-          </v-checkbox>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-checkbox
-            v-model="selectedType"
-            label="microbuze"
-            name="microbuze"
-            value="microbuze"
-            color="orange"
-          >
-            microbuze
-          </v-checkbox>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-select
+      :items="transportationType"
+      v-model="selectedType"
+      clearable
+      full-width
+      item-color="green"
+      solo
+      label="Filtreaza..."
+    ></v-select>
     <LinesList v-if="!isLoading" :selected-type="selectedType" :buses="buses" />
     <BaseLoading v-if="isLoading" />
   </div>
@@ -66,9 +26,10 @@ export default {
   },
   data() {
     return {
-      selectedType: [],
+      selectedType: "",
       isLoading: true,
-      buses: []
+      buses: [],
+      transportationType: ["autobuze", "troleibuze", "tramvaie", "microbuze"]
     };
   },
   created() {

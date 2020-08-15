@@ -1,6 +1,6 @@
 <template>
-  <v-card :to="'/bus/' + busWithStop.name" class="black--text">
-    <v-card-title>
+  <v-card :to="'/bus/' + busWithStop.name">
+    <v-card-title class="pb-0">
       <h2 class="headline mb-0">
         <v-avatar size="38">
           <v-icon dark :class="transportationStyle">{{
@@ -15,12 +15,12 @@
         <v-row>
           <v-col cols="6">
             <div v-if="busWithStop.next_in_stop">
-              <h3 class="font-weight-regular black--text ">
+              <h3 class="font-weight-regular  ">
                 {{ busWithStop.in_stop_name }}
               </h3>
               {{ busWithStop.next_in_stop.currentDateTime }}
               <span class="grey--text text--lighten-1"> # </span>
-              <v-chip class="cyan lighten-4 black--text">
+              <v-chip class="cyan lighten-4 ">
                 {{ busWithStop.next_in_stop.formatTime }} -
                 {{ busWithStop.next_in_stop.remainingTime }}
               </v-chip>
@@ -29,6 +29,7 @@
                 background-color="green lighten-4"
                 color="green"
                 height="8"
+                rounded
                 v-model="busWithStop.next_in_stop.progress"
               />
             </div>
@@ -46,10 +47,11 @@
               </v-chip>
               <v-progress-linear
                 class="mt-5"
-                v-model="busWithStop.next_out_stop.progress"
                 background-color="green lighten-4"
                 color="green"
                 height="8"
+                rounded
+                v-model="busWithStop.next_out_stop.progress"
               />
             </div>
           </v-col>

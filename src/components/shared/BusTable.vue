@@ -7,11 +7,12 @@
     disable-sort
     hide-default-footer
     fixed-header
+    mobile-breakpoint="0"
     no-data-text="Nu sunt date disponibile"
     class="elevation-0 text-xs-center bus-table"
   >
     <template v-slot:body="{ items }">
-      <tbody>
+      <tbody class="text-center">
         <tr v-for="item in items" :key="item.name">
           <td
             :class="{

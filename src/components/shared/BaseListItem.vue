@@ -12,11 +12,6 @@
           route
         }}</v-list-item-subtitle>
       </v-list-item-content>
-      <v-list-item-action>
-        <v-btn icon ripple :aria-label="title">
-          <v-icon class="grey--text text--lighten-1">info</v-icon>
-        </v-btn>
-      </v-list-item-action>
     </v-list-item>
   </router-link>
 </template>

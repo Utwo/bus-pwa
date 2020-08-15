@@ -1,5 +1,13 @@
 <template>
-  <v-app-bar app dark :absolute="true" color="green lighten-2">
+  <v-app-bar
+    app
+    dark
+    flat
+    :absolute="true"
+    color="green lighten-1"
+    extended
+    extension-height="60"
+  >
     <v-toolbar-title class="title mr-4">
       Cluj BUS
     </v-toolbar-title>
@@ -58,14 +66,7 @@
       </v-list>
     </v-menu>
     <template v-slot:extension>
-      <v-tabs
-        icons-and-text
-        centered
-        grow
-        dark
-        color="white"
-        slider-color="cyan"
-      >
+      <v-tabs icons-and-text centered grow slider-color="cyan">
         <v-tab to="/" router>
           <span>Lines</span>
           <v-icon>directions_bus</v-icon>

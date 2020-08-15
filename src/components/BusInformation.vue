@@ -1,7 +1,7 @@
 <template>
   <transition name="bus-info-transition">
     <div v-if="busItem && !isLoading">
-      <v-toolbar class="white">
+      <v-toolbar outlined extended extension-height="5">
         <v-toolbar-title class="headline">
           {{ busItem.name }}
         </v-toolbar-title>
@@ -19,12 +19,18 @@
           <v-icon>favorite</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-tabs v-model="current_key" grow class="white" @change="scrollTo">
-        <v-tabs-slider class="yellow" />
+      <v-tabs
+        v-model="current_key"
+        grow
+        centered
+        color="black"
+        slider-color="cyan"
+        @change="scrollTo"
+      >
         <v-tab v-if="busItem.station.lv" :href="'#tab-lv'">Luni-Vineri</v-tab>
         <v-tab v-if="busItem.station.s" :href="'#tab-s'">Sambata</v-tab>
         <v-tab v-if="busItem.station.d" :href="'#tab-d'">Duminica</v-tab>
-        <v-tabs-items class="white" v-model="current_key">
+        <v-tabs-items v-model="current_key">
           <v-tab-item v-if="busItem.station.lv" id="tab-lv">
             <BusTable
               :hour-list="busItem.station.lv.lines"
