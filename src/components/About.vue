@@ -23,7 +23,7 @@
         contributions are always welcome and appreciated.
       </p>
       <v-divider class="my-4" />
-      <div class="text-xs-center">
+      <div class="text-center">
         <img class="bus-icon" src="../../public/bus.svg" alt="bus icon" />
       </div>
     </div>
