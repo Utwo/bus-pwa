@@ -1,6 +1,6 @@
 {
   "name": "BusCluj",
-  "short_name": "Bus",
+  "short_name": "BusCluj",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -9,12 +9,12 @@
     },
     {
       "src": "/img/icons/android-chrome-256x256.png",
-      "sizes": "512x512",
+      "sizes": "256x256",
       "type": "image/png"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fff",
-  "theme_color": "#81c784"
+  "theme_color": "#1DE9B6"
 }

@@ -6,8 +6,8 @@ export default {
         autobuze: "cyan",
         microbuze: "orange",
         troleibuze: "pink"
-      }
-      return style[this.transportationType]
+      };
+      return style[this.transportationType];
     },
     transportationIcon() {
       const icon = {
@@ -15,8 +15,8 @@ export default {
         autobuze: "directions_bus",
         microbuze: "local_shipping",
         troleibuze: "directions_transit"
-      }
-      return icon[this.transportationType]
+      };
+      return icon[this.transportationType];
     }
   }
-}
+};

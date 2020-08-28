@@ -1,6 +1,6 @@
 <template>
-  <v-card :to="'/bus/' + busWithStop.name" class="black--text">
-    <v-card-title>
+  <v-card :to="'/bus/' + busWithStop.name">
+    <v-card-title class="pb-0">
       <h2 class="headline mb-0">
         <v-avatar size="38">
           <v-icon dark :class="transportationStyle">{{
@@ -11,38 +11,58 @@
       </h2>
     </v-card-title>
     <v-card-actions>
-      <v-layout row wrap class="text-xs-center">
-        <v-flex xs6>
-          <div v-if="busWithStop.next_in_stop">
-            <h3 class="font-weight-regular">{{ busWithStop.in_stop_name }}</h3>
-            {{ busWithStop.next_in_stop.currentDateTime }}
-            <span class="grey--text text--lighten-1"> # </span>
-            <v-chip class="cyan lighten-4">
-              {{ busWithStop.next_in_stop.formatTime }} -
-              {{ busWithStop.next_in_stop.remainingTime }}
-            </v-chip>
-            <v-progress-linear v-model="busWithStop.next_in_stop.progress" />
-          </div>
-        </v-flex>
-        <v-flex xs6>
-          <div v-if="busWithStop.next_out_stop">
-            <h3 class="font-weight-regular">{{ busWithStop.out_stop_name }}</h3>
-            {{ busWithStop.next_out_stop.currentDateTime }}
-            <span class="grey--text text--lighten-1"> # </span>
-            <v-chip color="red lighten-4">
-              {{ busWithStop.next_out_stop.formatTime }} -
-              {{ busWithStop.next_out_stop.remainingTime }}
-            </v-chip>
-            <v-progress-linear v-model="busWithStop.next_out_stop.progress" />
-          </div>
-        </v-flex>
-      </v-layout>
+      <v-container class="text-center">
+        <v-row>
+          <v-col cols="6">
+            <div v-if="busWithStop.next_in_stop">
+              <h3 class="font-weight-regular  ">
+                {{ busWithStop.in_stop_name }}
+              </h3>
+              {{ busWithStop.next_in_stop.currentDateTime }}
+              <span class="grey--text text--lighten-1"> # </span>
+              <v-chip class="cyan lighten-4 ">
+                {{ busWithStop.next_in_stop.formatTime }} -
+                {{ busWithStop.next_in_stop.remainingTime }}
+              </v-chip>
+              <v-progress-linear
+                class="mt-5"
+                background-color="teal lighten-4"
+                color="teal accent-4"
+                height="8"
+                rounded
+                v-model="busWithStop.next_in_stop.progress"
+              />
+            </div>
+          </v-col>
+          <v-col cols="6">
+            <div v-if="busWithStop.next_out_stop">
+              <h3 class="font-weight-regular">
+                {{ busWithStop.out_stop_name }}
+              </h3>
+              {{ busWithStop.next_out_stop.currentDateTime }}
+              <span class="grey--text text--lighten-1"> # </span>
+              <v-chip color="red lighten-4">
+                {{ busWithStop.next_out_stop.formatTime }} -
+                {{ busWithStop.next_out_stop.remainingTime }}
+              </v-chip>
+              <v-progress-linear
+                class="mt-5"
+                background-color="teal lighten-4"
+                color="teal accent-4"
+                height="8"
+                rounded
+                v-model="busWithStop.next_out_stop.progress"
+              />
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import commonFunctions from "../services/CommonFunctions.js"
+import commonFunctions from "../services/CommonFunctions.js";
 
 export default {
   props: {
@@ -57,22 +77,22 @@ export default {
   },
   computed: {
     busWithStop() {
-      console.debug(this.now) // keep this to force computed update
-      const todayAbbreviation = commonFunctions.getDayAbbreviation()
+      console.debug(this.now); // keep this to force computed update
+      const todayAbbreviation = commonFunctions.getDayAbbreviation();
       if (this.bus.station[todayAbbreviation]) {
         const { in_stop_name, out_stop_name } = this.bus.station[
           todayAbbreviation
-        ]
-        const todayHourList = commonFunctions.getTodayHourList(this.bus)
+        ];
+        const todayHourList = commonFunctions.getTodayHourList(this.bus);
         const nextStation = commonFunctions.calculateNextStationTime(
           todayHourList
-        )
+        );
         return Object.assign(this.bus, nextStation, {
           in_stop_name,
           out_stop_name
-        })
+        });
       }
-      return this.bus
+      return this.bus;
     },
     transportationStyle() {
       return {
@@ -80,7 +100,7 @@ export default {
         cyan: this.bus.type === "autobuze",
         orange: this.bus.type === "microbuze",
         pink: this.bus.type === "troleibuze"
-      }
+      };
     },
     transportationIcon() {
       const icon = {
@@ -88,9 +108,9 @@ export default {
         autobuze: "directions_bus",
         microbuze: "local_shipping",
         troleibuze: "directions_transit"
-      }
-      return icon[this.bus.type]
+      };
+      return icon[this.bus.type];
     }
   }
-}
+};
 </script>

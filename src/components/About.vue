@@ -1,7 +1,7 @@
 <template functional>
   <transition name="fade">
-    <v-container v-once fluid>
-      <h2 class="grey--text text--lighten-1">About</h2>
+    <div class="pa-5">
+      <h2 class="grey--text">About</h2>
       <p>A simple bus schedule pwa app made in Vue.</p>
       <p>This app lets you to:</p>
       <ul>
@@ -23,10 +23,10 @@
         contributions are always welcome and appreciated.
       </p>
       <v-divider class="my-4" />
-      <div class="text-xs-center">
+      <div class="text-center">
         <img class="bus-icon" src="../../public/bus.svg" alt="bus icon" />
       </div>
-    </v-container>
+    </div>
   </transition>
 </template>
 

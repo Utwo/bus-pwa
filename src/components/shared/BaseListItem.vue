@@ -1,29 +1,23 @@
 <template>
   <router-link :to="'bus/' + title">
-    <v-list-tile :key="title" avatar>
-      <v-list-tile-avatar>
+    <v-list-item :key="title">
+      <v-list-item-avatar>
         <v-icon :class="transportationStyle" class="white--text">{{
           transportationIcon
         }}</v-icon>
-      </v-list-tile-avatar>
-      <v-list-tile-content>
-        <v-list-tile-title>{{ title }}</v-list-tile-title>
-        <v-list-tile-sub-title class="grey--text text--darken-2">{{
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-list-item-title>{{ title }}</v-list-item-title>
+        <v-list-item-subtitle class="grey--text text--darken-2">{{
           route
-        }}</v-list-tile-sub-title>
-      </v-list-tile-content>
-      <v-list-tile-action>
-        <v-btn icon ripple :aria-label="title">
-          <v-icon class="grey--text text--lighten-1">info</v-icon>
-        </v-btn>
-      </v-list-tile-action>
-    </v-list-tile>
+        }}</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
   </router-link>
 </template>
 
 <script>
-import IconMixin from "../../mixins/IconMixin"
-
+import IconMixin from "../../mixins/IconMixin";
 export default {
   mixins: [IconMixin],
   props: {
@@ -44,5 +38,5 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
