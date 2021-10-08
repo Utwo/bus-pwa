@@ -5,7 +5,7 @@ module.exports = {
     workboxOptions: {
       runtimeCaching: [
         {
-          urlPattern: /^https:\/\/ctpcj-scraper\.now\.sh/,
+          urlPattern: /^https:\/\/ctpcj-scraper-utwo\.vercel\.app/,
           handler: "StaleWhileRevalidate",
           options: {
             cacheName: "ctpcj-scraper",
